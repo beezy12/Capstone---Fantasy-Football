@@ -1,0 +1,30 @@
+{
+  "name": "modules",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Brian Stumbaugh <brian.stumbuagh@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/beezy12/Capstone---Fantasy-Football",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.22",
+    "bootstrap": "~3.3.6",
+    "handlebars": "~4.0.5",
+    "require-handlebars-plugin": "~1.0.0",
+    "firebase": "~2.3.2",
+    "q": "~2.0.2",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angularfire": "~1.1.3"
+  }
+}
