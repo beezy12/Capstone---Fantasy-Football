@@ -2,6 +2,10 @@ $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 
 body {
-  font: 100% $font-stack;
+  font: 18px $font-stack;
   color: $primary-color;
+}
+
+#signIn {
+	margin: 200px 0 0 0;
 }

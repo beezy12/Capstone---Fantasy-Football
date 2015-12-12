@@ -4,7 +4,7 @@ var app = angular.module("footballGurus",
 app.config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider
-			.when('/splash' {
+			.when('/splash', {
 				templateUrl: './app/partials/splash.html',
 				controller: 'loginCtrl'
 			});

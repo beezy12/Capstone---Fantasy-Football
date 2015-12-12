@@ -1,13 +1,17 @@
-<div>
-	<label for="email">email:</label>
-	<input type="text" />
+<div class="container-fluid">
+ 	<div class="row">
+   		<div class="col-md-6 col-md-offset-4" id="signIn">
+			<label for="email">email:</label>
+			<input type="text" />
 
-	<label for="password">password:</label>
-	<input type="text" />
+			<label for="password">password:</label>
+			<input type="text" />
 
-	<p>New here? Click 'register' button.</p>
-	<button>Register</button>
+			<p>New here? Click 'register' button.</p>
+			<button ng-click="registerMe()">Register</button>
 
-	<p>Already have an account? Sign in.</p>
-	<button>Sign in</button>
+			<p>Already have an account? Sign in.</p>
+			<button ng-click="signMeIn()">Sign in</button>
+		</div>
+	</div>
 </div>
