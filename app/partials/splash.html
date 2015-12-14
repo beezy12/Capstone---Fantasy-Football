@@ -1,26 +1,37 @@
 <div class="container-fluid">
  	<div class="row">
-   		<div class="col-md-6 col-md-offset-3" id="signIn">
-			
-			<p>New here? Enter info and click 'register' button.</p>
+   		<div class="col-md-8 col-md-offset-2" id="signIn">
 
-			<label for="email">email:</label>
-			<input type="text" ng-model="loginEmail" id="loginEmail" />
+			<div class="col-md-6 rightBorder">	
+				<p>New here? Enter info and click 'register' button.</p>
 
-			<label for="password">password:</label>
-			<input type="text" ng-model="loginPassword" id="loginPassword" />
+				<label for="email">email:</label>
+				<input type="text" ng-model="loginEmail" id="loginEmail" /><br/>
 
-			<label for="firstName">First Name: </label>
-			<input type="text" ng-model="firstName" id="firstName">
-			<br/>
+				<label for="password">password:</label>
+				<input type="text" ng-model="loginPassword" id="loginPassword" /><br/>
 
-			<label for="lastName">Last Name: </label>
-			<input type="text" ng-model="lastName" id="LastName">
+				<label for="firstName">First Name: </label>
+				<input type="text" ng-model="firstName" id="firstName"><br/>
 
-			<button ng-click="registerUser()">Register</button>
+				<label for="lastName">Last Name: </label>
+				<input type="text" ng-model="lastName" id="LastName"><br/>
 
-			<p>Already have an account? Sign in.</p>
-			<button ng-click="signUserIn()">Sign in</button>
+				<button ng-click="registerUser()">Register</button>
+			</div>
+
+			<div class="col-md-3 col-md-offset-2">
+				<p>Already have an account? Sign in.</p>
+
+				<label for="email">email:</label>
+				<input type="text" ng-model="loginEmail" id="loginEmail" /><br/>
+
+				<label for="password">password:</label>
+				<input type="text" ng-model="loginPassword" id="loginPassword" /><br/>
+
+				<button ng-click="loginUser()">Sign in</button>
+			</div>
+
 		</div>
 	</div>
 </div>
