@@ -49,7 +49,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 				$location.path('/home');
 				$rootScope.$apply();
 				}
-				console.log("authData.uid", authData.uid);
+				
 
 			});
 		};
