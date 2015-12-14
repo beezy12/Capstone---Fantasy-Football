@@ -8,5 +8,5 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray",
 
 		$scope.signMeIn = function() {
 			console.log("hear that ol sign in button being clicked");
-		}
+		};
 	}]);
