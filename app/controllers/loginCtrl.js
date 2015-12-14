@@ -11,6 +11,9 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/user");
 		console.log("ref is ", ref);
 
+		var teamsRef = new Firebase("https://capstonefootball.firebaseio.com/teams");
+		console.log("teamsRef: ", teamsRef);
+
 		$scope.registerUser = function() {
 			ref.createUser({
 				email: $scope.loginEmail,
@@ -25,13 +28,23 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 					ref.child("/"+userData.uid).set({
 						"firstName": $scope.firstName,
-						"lastName": $scope.lastName
+						"teamName": $scope.teamName
 					});
+
+					// ref.child("/"+userData.uid.team)
+					teamsRef.push({
+						"teamName": $scope.teamName,
+						"userId": currentUid
+					});
+
+
+					$location.path('/home');
+					$rootScope.$apply();
 				}
 			});
 		};
 
-	// WHATS THE BEST WAY TO LOAD THE MAIN PAGE AFTER USER HAS REGISTERED OR LOGGED IN?????	
+	
 
 
 		$scope.loginUser = function() {
@@ -53,4 +66,18 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 			});
 		};
+
+
+		$scope.logout = function() {
+			generalVariables.logUserOut();
+			console.log("heard the logout here in loginCtrl");
+		};
+
+
+
+
+
 	}]);
+
+
+

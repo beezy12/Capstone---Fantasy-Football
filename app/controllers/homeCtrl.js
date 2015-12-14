@@ -7,8 +7,25 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 		console.log("userArray", userArray);
 
 
+		// $scope.goHome = function() {
+		// 	$location.path('/home');
+		// 	$rootScope.$apply();
+		// };
 
-		$scope.goTeam = function
+		// $scope.goTeam = function() {
+		// 	$location.path('/team');
+		// 	$rootScope.$apply();
+		// };
+
+		// $scope.goPlayers = function() {
+		// 	$location.path('/players');
+		// 	$rootScope.$apply();
+		// };
+
+		// $scope.goDraft = function() {
+		// 	$location.path('/draft');
+		// 	$rootScope.$apply();
+		// };
 
 
 	}]);

@@ -1,5 +1,5 @@
-app.factory("generalVariables", ["$q", "$http", "$location", 
-	function($q, $http, $location) {
+app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
+	function($q, $http, $location, $rootScope) {
 
 		var userUid;
 
@@ -11,9 +11,17 @@ app.factory("generalVariables", ["$q", "$http", "$location",
 
 			setUid: function(value) {
 				userUid = value;
+			},
+
+			logUserOut: function() {
+				var ref = new Firebase("https://capstonefootball.firebaseio.com/");
+				ref.unauth();
+				// $location.path('/splash');
+				// $rootScope.$apply();
+				console.log("user" + ref + " was logged out");
 			}
 
-			
+
 		};
 	
 
