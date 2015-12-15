@@ -1,6 +1,7 @@
-app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray",
-	function($scope, $q, $http, $firebaseArray) {
+app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "generalVariables",
+	function($scope, $q, $http, $firebaseArray, generalVariables) {
 
+		generalVariables.setHeight();
 		// commented all this out because I only needed it to populate my firebase with players once.
 
 		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayers");
@@ -26,13 +27,47 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray",
 
 		// })
 
+	$scope.loadedPlayers = [];
 
 	var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayers");
 
 	var playerArray = $firebaseArray(playerRef);
 	console.log("playerArray-->", playerArray);
 
-	// do a promise next?? look and see what ben did on pinterest
+
+	playerArray
+		.$loaded()
+		.then(function(data) {
+			$scope.loadedPlayers = playerArray;
+			console.log("$scope.loadedPlayers--->", $scope.loadedPlayers);
+		});
+
+	$scope.do = function(yo) {
+		var players = $scope.loadedPlayers;
+		for (var i=0; i < players.length; i++){
+			if (yo === players[i].$id) {
+				$scope.modalPlayer = players[i];
+			}
+		}
+	};
+
+
+	var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
+	$scope.draftPlayer = function(yo) {
+		
+	};
+
+
+
+	// pinArray
+	//     .$loaded()
+	//     .then(function(data){
+
+	//     	$scope.matchedArray = pinArray;
+
+	//     	console.log(generalVariables.getUid());
+
+	//     	});
 
 
 

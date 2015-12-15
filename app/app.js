@@ -25,3 +25,15 @@ app.config(['$routeProvider',
 				controller: 'playersCtrl'
 			});
 	}]);
+
+
+
+/* checklist:
+	
+		- when hover over draft player, add border and darken
+		- when ng-click on player, pop up modal and ask if this is the player you want
+		- when click 'yes' add player to team
+
+
+
+*/

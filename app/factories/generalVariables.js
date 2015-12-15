@@ -19,8 +19,11 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				// $location.path('/splash');
 				// $rootScope.$apply();
 				console.log("user" + ref + " was logged out");
-			}
+			},
 
+			setHeight: function() {
+				$("body").css({"height":$(window).height()});
+			}
 
 		};
 	
