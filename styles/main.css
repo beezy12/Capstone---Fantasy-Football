@@ -2,7 +2,56 @@ body {
   font: 18px Helvetica, sans-serif;
   color: #333; }
 
+/*# sourceMappingURL=main.css.map */
 #signIn {
-  margin: 200px 0 0 0; }
+  margin-top: 200px;
+  border: 1px solid red; }
+
+.borderBottom {
+  border-bottom: 2px solid red; }
+
+.navButt {
+  background-color: blue;
+  width: 200px;
+  margin-top: 20px; }
+
+.btn-default.active {
+  border-color: red; }
+
+.leagueTable {
+  border: 1px solid black;
+  padding: 25px;
+  /*margin-left: 80px;*/
+  /*margin-top: 70px;*/ }
+
+.messageMainBox {
+  /*margin-top: 70px;*/
+  height: 300px;
+  width: 300px; }
+
+.messageMain {
+  margin-left: 180px; }
+
+.rightBorder {
+  border-right: 2px solid red; }
+
+.draft {
+  height: 700px; }
+
+.draftHeader {
+  height: 120px; }
+
+.draftMyTeam {
+  width: 400px;
+  height: 500px;
+  border: 1px solid red;
+  margin: 40px 0 0 50px; }
+
+.teamHead {
+  height: 120px; }
+
+.teamDiv {
+  display: table;
+  margin: 0 auto; }
 
 /*# sourceMappingURL=main.css.map */
