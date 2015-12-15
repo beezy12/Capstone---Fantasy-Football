@@ -37,12 +37,12 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 						"userId": currentUid
 					});
 
-
 					$location.path('/home');
 					$rootScope.$apply();
 				}
 			});
 		};
+
 
 	
 
