@@ -18,8 +18,8 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4 rightBorder draft divHeight">
-            <div ng-repeat="dude in loadedPlayers" class="row draftBoxes">
-                <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft" ng-click="do(dude.$id)">
+            <div ng-repeat="dude in loadedPlayers" class="row draftBoxes draftPicks" ng-click="do(dude.$id)">
+                <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
     			     <!-- <img src=""> -->
                     <p>{{dude.displayName}} - {{dude.position}} - {{dude.team}}</p>
                 </div>

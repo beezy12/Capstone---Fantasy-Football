@@ -1,7 +1,10 @@
 app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "generalVariables",
 	function($scope, $q, $http, $firebaseArray, generalVariables) {
 
-		generalVariables.setHeight();
+		// generalVariables.setHeight();
+
+		
+		generalVariables.getUid();
 		// commented all this out because I only needed it to populate my firebase with players once.
 
 		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayers");
@@ -42,34 +45,55 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "general
 			console.log("$scope.loadedPlayers--->", $scope.loadedPlayers);
 		});
 
+	//set player id
 	$scope.do = function(yo) {
 		var players = $scope.loadedPlayers;
 		for (var i=0; i < players.length; i++){
 			if (yo === players[i].$id) {
 				$scope.modalPlayer = players[i];
+				console.log("players[i]", players[i]);
 			}
 		}
 	};
 
-
-	var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
-	$scope.draftPlayer = function(yo) {
-		
+	var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers");
+	
+	//push playerid:userId to teamPlayers in firebase
+	$scope.draftPlayer = function() {
+		teamPlayersRef.child($scope.modalPlayer.$id).set(generalVariables.getUid());
 	};
 
 
 
-	// pinArray
-	//     .$loaded()
-	//     .then(function(data){
-
-	//     	$scope.matchedArray = pinArray;
-
-	//     	console.log(generalVariables.getUid());
-
-	//     	});
+	
 
 
+	// do a promise here
+
+	// $scope.draftPlayer = function() {
+	// 	generalVariables.getUid()
+	// 		.then(function(uid) {
+	// 			var currentUid = uid;
+	// 			console.log("currentUid --->", currentUid);
+	// 			// return currentUid;
+				
+	// 			teamPlayersRef.push($scope.modalPlayer.$id);
+	// 		})
+	// 		.fail(function(error) {
+	// 			console.log("you donked it");
+	// 		});
+	// };
+		
+		// $scope.draftPlayer = function() {
+		// 	generalVariables.getUid()
+		// 		.$loaded()
+		// 		.then(function(uid) {
+		// 			var currentUid = uid;
+		// 			console.log("currentUid ----->", currentUid);
+		// 		});
+			
+		// };
+			
 
 }]);
 

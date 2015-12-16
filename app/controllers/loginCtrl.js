@@ -58,15 +58,17 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					console.log("you done messed up", error);
 				} else {
 					console.log("user logged in successfully with payload: ", authData);
-				generalVariables.setUid(authData.uid);
-				$location.path('/home');
-				$rootScope.$apply();
+					generalVariables.setUid(authData.uid);
+					$location.path('/home');
+					$rootScope.$apply();
 				}
 				
 
 			});
 		};
 
+		// generalVariables.checkUserLogin();
+		// console.log("method checkUserLogin fired....not sure if it's in the right spot");
 
 		$scope.logout = function() {
 			generalVariables.logUserOut();
