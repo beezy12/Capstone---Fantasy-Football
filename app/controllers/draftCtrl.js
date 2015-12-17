@@ -63,6 +63,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "general
 			}
 		};
 
+			
+
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers");
 		
 		//push playerid:userId to teamPlayers in firebase
@@ -70,20 +72,22 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "general
 			teamPlayersRef.child($scope.modalPlayer.$id).set(generalVariables.getUid());
 			console.log("teamPlayersRef.child($scope.modalPlayer.$id) -----> here", teamPlayersRef);
 
+			//get ref to players, set drafted to true
+			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
+
+			// if drafted === true, add player to currentUid team list on draft list AND team homepage, and hide player card from draft list
+			// if ($scope.modalPlayer.$id).child("drafted" === true) {
+			// 	when $scope.myValue is truthy 
+			// }
+			
 			// deletes player from draft list after pick
 			// $scope.loadedPlayers.child.$remove($scope.modalPlayer.$id);
 
 			
-			//get ref to players, set drafted to true
-			// playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
-
-
-			// if drafted === true, add player to currentUid team list on draft list AND team homepage, and hide player card from draft list
-			// if ($scope.modalPlayer.$id).child("drafted" === true) {
-			// 	angular.element(document.queryselector("").css({"display": "none"}));
-			// }
-				
 		};
+
+
+				
 
 
 
