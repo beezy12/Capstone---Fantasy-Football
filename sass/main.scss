@@ -96,6 +96,17 @@ body {
 	background-color: #A29F9F;
 }
 
+.draftTeams li{
+	display: inline;
+	list-style: none;
+	// width: 110px;
+	// height: 50px;
+	border: 1px solid blue;
+    bottom:0px;
+    width:100%; //width should be 100%
+}
+
+
 
 
 

@@ -2,7 +2,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 	function($q, $http, $location, $rootScope) {
 
 		var userUid;
-
+		var pathName;
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
 
 		return {
