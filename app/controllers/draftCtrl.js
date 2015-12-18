@@ -4,17 +4,19 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// generalVariables.setHeight();
 
 		window._ = _;
+
+		generalVariables.checkUserLogin('draft');
 		
+		// get the logged in userId and set it to var currentUid
 		var currentUid = generalVariables.getUid();
 		console.log("currentUid that gets logged when draft page loads ----->", currentUid);
-		// generalVariables.checkUserLogin();
 
 
 
 		// commented all this out because I only needed it to populate my firebase with players once.
 
 		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
-		// var deletePlayersRef = new Firebase("https://capstonefootball.firebaseio.com/ydeleteDraftedPlayers");
+		
 
 		// var apiCall = $q(function(resolve, reject){
 		// 	$http.get("http://www.fantasyfootballnerd.com/service/draft-rankings/json/j8vrkn628sv6/1/").success(
@@ -23,7 +25,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 		resolve(object);
 		// 	});
 		// });
-
+		
+		//  //KEEP THIS. THIS IS WHERE I SET EACH PLAYER'S DRAFTED TO FALSE.
 		// apiCall.then(function(data){
 		// 	console.log("data is ", data.DraftRankings);
 			
@@ -32,13 +35,13 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 		 console.log("Current Balla status is ", data.DraftRankings[i]);
 		// 		 data.DraftRankings[i].drafted = false;
 		// 		 playerRef.push(data.DraftRankings[i]);
-		// 		 deletePlayersRef.push(data.DraftRankings[i]);
+				 
 		// 	}
 		// });
 
 		var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
 
-		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers");
+		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -70,11 +73,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		
 
-		// *********** ALL PLAYERS ARE LOADED TO DOM NO MATTER WHO LOGS IN
-		//     **********  DO A USER ID CHECK ON PAGE LOAD AND ONLY LOAD THOSE PLAYERS
+		// if currentUid === teamPlayers/child.value
+		var outputRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+currentUid);
 
-		
-		
+
 		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
 		var teamPlayersArray = $firebaseArray(teamPlayersRef);
@@ -83,20 +85,20 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			teamPlayersArray.$loaded()
 				.then(function(draftedPlayers){
-					console.log("draftedPlayers ", draftedPlayers);
+					console.log("draftedPlayers ----> ", draftedPlayers);
 
 					$firebaseArray(playerRef).$loaded()
-					.then(function(allPlayers){
+					.then(function(allPlayers) {
 						console.log("allPlayers ", allPlayers);
 
-						for(var s = 0; s < draftedPlayers.length; s++){
-							_.filter(allPlayers, function(index){
-								if(draftedPlayers[s].$id ===  index.$id){
+						for(var s = 0; s < draftedPlayers.length; s++) {
+							_.filter(allPlayers, function(index) {
+								if(draftedPlayers[s].$id ===  index.$id && draftedPlayers[s].$value === currentUid) {
 									$scope.myPlayers.push(index);
-										
 								}
 							});
 						}
+										
 
 						teamPlayersArray.$watch(function(snapshot) { 
 							console.log("snapshot ", snapshot);
@@ -111,7 +113,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 									//filter all returned players and grab player whose id matches the player added in the event above
 									_.filter(playersReturned, function(index){
-										if(index.$id === snapshot.key){
+										if(index.$id === snapshot.key  && draftedPlayers[s].$value === currentUid){
+											console.log(snapshot)
 											console.log("player to add ", index);
 
 											$scope.myPlayers.push(index);
@@ -120,10 +123,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 								})
 							}
 
+console.log("my players ", $scope.myPlayers);
 						});
 
 						
 					})
+
 
 				});
 		

@@ -4,10 +4,10 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
 		var userArray = $firebaseArray(userRef);
-		console.log("userArray", userArray);
+		
 
-		generalVariables.checkUserLogin();
-		console.log("method checkUserLogin fired....not sure if it's in the right spot");
+		generalVariables.checkUserLogin('home');
+		
 
 
 }]);
