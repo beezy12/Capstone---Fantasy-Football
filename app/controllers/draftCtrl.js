@@ -39,7 +39,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers");
-
+		
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
 
@@ -73,38 +73,61 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// *********** ALL PLAYERS ARE LOADED TO DOM NO MATTER WHO LOGS IN
 		//     **********  DO A USER ID CHECK ON PAGE LOAD AND ONLY LOAD THOSE PLAYERS
 
-		$scope.myPlayers = [];
 		// var arr = [];
-		// var thang =[]
 		// var draftlist = [];
+		
+		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
 		var teamPlayersArray = $firebaseArray(teamPlayersRef);
-		// angular.element(".draftMyTeam").html("");
-		teamPlayersArray.$watch(function(snapshot) { 
+		
+		
 
 			teamPlayersArray.$loaded()
-				.then(function(draftedPlayers) {
+				.then(function(draftedPlayers){
 					console.log("draftedPlayers ", draftedPlayers);
 
 					$firebaseArray(playerRef).$loaded()
-						.then(function(allPlayers) {
-							console.log("allPlayers ", allPlayers);
+					.then(function(allPlayers){
+						console.log("allPlayers ", allPlayers);
 
-							for(var s = 0; s < draftedPlayers.length; s++){
-								_.filter(allPlayers, function(index){
-									// console.log("index ", index);
-									if(draftedPlayers[s].$id ===  index.$id){
-										// thang.push(index);
-										$scope.myPlayers.push(index);
-									}
-								});
+						for(var s = 0; s < draftedPlayers.length; s++){
+							_.filter(allPlayers, function(index){
+								if(draftedPlayers[s].$id ===  index.$id){
+									$scope.myPlayers.push(index);
+										
+								}
+							});
+						}
+
+						teamPlayersArray.$watch(function(snapshot) { 
+							console.log("snapshot ", snapshot);
+
+							//if child has been added to teamPlayers
+							if(snapshot.event === "child_added"){
+
+								//get player info of player that matches key, and push that player into my players array
+								$firebaseArray(playerRef).$loaded()
+								.then(function(playersReturned){
+									console.log("playersReturned ", playersReturned);
+
+									//filter all returned players and grab player whose id matches the player added in the event above
+									_.filter(playersReturned, function(index){
+										if(index.$id === snapshot.key){
+											console.log("player to add ", index);
+
+											$scope.myPlayers.push(index);
+										}
+									})
+								})
 							}
 
-							// console.log("thang ", thang);
-						})
+						});
+
+						
+					})
 
 				});
-		});
+		
 		// teamPlayersArray.$watch(function(snapshot) { 
 
 		// 	console.log("teamPlayersArray ", teamPlayersArray);
@@ -229,3 +252,4 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 
 			
+								
