@@ -73,8 +73,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// *********** ALL PLAYERS ARE LOADED TO DOM NO MATTER WHO LOGS IN
 		//     **********  DO A USER ID CHECK ON PAGE LOAD AND ONLY LOAD THOSE PLAYERS
 
-		// var arr = [];
-		// var draftlist = [];
+		
 		
 		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
