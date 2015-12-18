@@ -30,23 +30,6 @@
 
 
 
-<!-- <div class="container-fluid draftTeams">
-  <div class="row">
-    <div class="col-md-12">
-
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-
-    </div>
-  </div>
-</div> -->
-
-
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4 rightBorder draft divHeight">
@@ -64,8 +47,11 @@
 		<div class="col-md-5 rightBorder draft">
 			my team roster here
 			<div class="draftMyTeam">
-				<table class="leagueTable">
-            	<!-- <tr class="leagueTable">
+          <div ng-repeat="player in benPlayers">
+            {{player.displayName}}
+          </div>
+				<!-- <table class="leagueTable" ng-repeat="player in">
+            	<tr class="leagueTable">
                     <td class="leagueTable"></td>
                     <td class="leagueTable"></td>
                     <td class="leagueTable"></td>
@@ -99,8 +85,8 @@
                     <td class="leagueTable"></td>
                     <td class="leagueTable"></td>
                     <td class="leagueTable"></td>
-                </tr> -->
-            </table>
+                </tr>
+            </table> -->
 			</div>
 		</div>
 
