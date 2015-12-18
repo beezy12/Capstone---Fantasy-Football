@@ -6,6 +6,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		window._ = _;
 		
 		var currentUid = generalVariables.getUid();
+		console.log("currentUid that gets logged when draft page loads ----->", currentUid);
 		// generalVariables.checkUserLogin();
 
 
@@ -47,14 +48,13 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// takes the Firebase ref for the zPlayersList and turns it from an object into an array, which is
 		// then processed through a promise and returned to the empty array above
 		var playerArray = $firebaseArray(playerRef);
-		//console.log("playerArray-->", playerArray);
+		
 
 
 		playerArray
 			.$loaded()
 			.then(function(data) {
 				$scope.loadedPlayers = playerArray;
-				//console.log("$scope.loadedPlayers--->", $scope.loadedPlayers);
 			});
 
 		//set player id
@@ -70,39 +70,40 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		
 
-		// PUT PROMISE ON LOADEDPLAYERS AND THEN DO THIS BELOW
+		// *********** ALL PLAYERS ARE LOADED TO DOM NO MATTER WHO LOGS IN
+		//     **********  DO A USER ID CHECK ON PAGE LOAD AND ONLY LOAD THOSE PLAYERS
 
-		var arr = [];
-		var thang =[]
-		$scope.benPlayers = [];
-		var draftlist = [];
+		$scope.myPlayers = [];
+		// var arr = [];
+		// var thang =[]
+		// var draftlist = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
 		var teamPlayersArray = $firebaseArray(teamPlayersRef);
 		// angular.element(".draftMyTeam").html("");
 		teamPlayersArray.$watch(function(snapshot) { 
 
 			teamPlayersArray.$loaded()
-			.then(function(draftedPlayers){
-				console.log("draftedPlayers ", draftedPlayers);
+				.then(function(draftedPlayers) {
+					console.log("draftedPlayers ", draftedPlayers);
 
-				$firebaseArray(playerRef).$loaded()
-				.then(function(allPlayers){
-					console.log("allPlayers ", allPlayers);
+					$firebaseArray(playerRef).$loaded()
+						.then(function(allPlayers) {
+							console.log("allPlayers ", allPlayers);
 
-					for(var s = 0; s < draftedPlayers.length; s++){
-						_.filter(allPlayers, function(index){
-							// console.log("index ", index);
-							if(draftedPlayers[s].$id ===  index.$id){
-								thang.push(index);
-								$scope.benPlayers.push(index);
+							for(var s = 0; s < draftedPlayers.length; s++){
+								_.filter(allPlayers, function(index){
+									// console.log("index ", index);
+									if(draftedPlayers[s].$id ===  index.$id){
+										// thang.push(index);
+										$scope.myPlayers.push(index);
+									}
+								});
 							}
-						});
-					}
 
-					console.log("thang ", thang);
-				})
+							// console.log("thang ", thang);
+						})
 
-			});
+				});
 		});
 		// teamPlayersArray.$watch(function(snapshot) { 
 
