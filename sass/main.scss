@@ -57,9 +57,9 @@ body {
 	border-right: 2px solid red;
 }
 
-.draft {
-	height: 10%;
-}
+// .draft {
+// 	height: 30%;
+// }
 
 .draftHeader {
 	height: 120px;
@@ -70,6 +70,7 @@ body {
 	height: 500px;
 	border: 1px solid red;
 	margin: 40px 0 0 50px;
+  overflow: scroll;
 }
 
 .teamHead {
@@ -87,10 +88,11 @@ body {
 	padding: 30px 0 0 20px;
 }
 
-// .divHeight {
-// 	height: 600px;
-// 	overflow: scroll;
-// }
+.divHeight {
+	height: 600px;
+  width: 200px;
+	overflow: scroll;
+}
 
 .draftPicks:hover {
 	background-color: #A29F9F;
@@ -105,6 +107,81 @@ body {
     bottom:0px;
     width:100%; //width should be 100%
     padding: 5px;
+}
+
+
+
+@-webkit-keyframes bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.bounceInLeft {
+  -webkit-animation-name: bounceInLeft;
+  animation-name: bounceInLeft;
 }
 
 

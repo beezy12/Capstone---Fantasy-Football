@@ -32,11 +32,11 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-4 rightBorder draft divHeight">
+		<div class="col-md-4 rightBorder divHeight">
       <div  ng-repeat="dude in loadedPlayers" class="row draftBoxes draftPicks" ng-click="do(dude.$id)" ng-hide="dude.drafted">
           <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
 		     <!-- <img src=""> -->
-              <p>{{dude.displayName}} - {{dude.position}} - {{dude.team}}</p>
+              {{dude.displayName}} - {{dude.position}} - {{dude.team}}
           </div>
       </div>
 		</div>
@@ -47,46 +47,12 @@
 		<div class="col-md-5 rightBorder draft">
 			my team roster here
 			<div class="draftMyTeam">
-          <div ng-repeat="player in myPlayers">
-            {{player.displayName}}
+          <div ng-repeat="player in myPlayers" class="animated bounce">
+            <div class="draftBoxes">
+              {{player.displayName}} - {{player.position}} - {{player.team}}
+            </div>
           </div>
-				<!-- <table class="leagueTable" ng-repeat="player in">
-            	<tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                    <td class="leagueTable"></td>
-                </tr>
-            </table> -->
+				
 			</div>
 		</div>
 

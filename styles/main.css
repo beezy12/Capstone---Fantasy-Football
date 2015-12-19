@@ -45,7 +45,16 @@ body {
   width: 400px;
   height: 500px;
   border: 1px solid red;
-  margin: 40px 0 0 50px; }
+  margin: 40px 0 0 50px; 
+  overflow: scroll;
+}
+
+
+.divHeight {
+  height: 400px;
+  width: 400px;
+  overflow: scroll;
+}
 
 .teamHead {
   height: 120px; }
