@@ -5,11 +5,13 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		$scope.loginEmail = "";
 		$scope.loginPassword = "";
 		$scope.firstName = "";
-		$scope.lastName = "";
+		$scope.teamName = "";
 		var currentUid;
 
-		var ref = new Firebase("https://capstonefootball.firebaseio.com/user");
-		console.log("ref is ", ref);
+		
+
+		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
+		console.log("userRef is ", userRef);
 
 		var teamsRef = new Firebase("https://capstonefootball.firebaseio.com/teams");
 		console.log("teamsRef: ", teamsRef);
@@ -17,7 +19,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
 
 		$scope.registerUser = function() {
-			ref.createUser({
+			userRef.createUser({
 				email: $scope.loginEmail,
 				password: $scope.loginPassword
 			}, function(error, userData) {
@@ -25,10 +27,12 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					console.log("you messed up something", error);
 				} else {
 					console.log("you made a profile with user Id of: ", userData.uid);
-					currentUid = userData.uid;
-					console.log("currentUid", currentUid);
+					// currentUid = userData.uid;
+					// console.log("currentUid", currentUid);
 
-					ref.child("/"+userData.uid).set({
+					generalVariables.setUid(userData.uid);
+
+					userRef.child("/"+userData.uid).set({
 						"firstName": $scope.firstName,
 						"teamName": $scope.teamName
 					});
@@ -39,7 +43,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 						"userId": currentUid
 					});
 
-					draftRef.child("/"+userData.uid).push({
+					draftRef.child("/"+userData.uid).set({
 						"teamName": $scope.teamName,
 						"online": true
 					});
@@ -58,7 +62,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		$scope.loginUser = function() {
 			console.log("hear that ol sign in button being clicked");
 
-			ref.authWithPassword({
+			userRef.authWithPassword({
 				email: $scope.loginEmail,
 				password: $scope.loginPassword
 			}, function(error, authData) {
@@ -71,7 +75,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 			// when user logs in, set online to true. when logging out, set online to false.
 
-					// draftRef.child("/"+authData.uid).set({
+					draftRef.child("/"+authData.uid).child("online").set(true);
 					// 	"playersHere": $scope.teamName
 					// });
 
@@ -86,13 +90,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		// generalVariables.checkUserLogin();
 		// console.log("method checkUserLogin fired....not sure if it's in the right spot");
 
-		$scope.logout = function() {
-			generalVariables.logUserOut();
-			console.log("heard the logout here in loginCtrl");
-		};
-
-
-
+		
 
 
 	}]);

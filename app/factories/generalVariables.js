@@ -5,6 +5,9 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 		// var pathName;
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
 
+
+		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+
 		return {
 
 			checkUserLogin : function(pathName){
@@ -34,11 +37,18 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 			},
 
 			logUserOut: function() {
-				var ref = new Firebase("https://capstonefootball.firebaseio.com/");
-				ref.unauth();
-				// $location.path('/splash');
-				// $rootScope.$apply();
-				console.log("user" + ref + " was logged out");
+
+				
+				var authData = ref.getAuth();
+
+				var newRef = new Firebase("https://capstonefootball.firebaseio.com/"+authData.uid);
+				newRef.unauth();
+
+				draftRef.child("/"+userUid).set({
+						"online": false
+					});
+
+				console.log("user" + newRef + " was logged out");
 			},
 
 			// setHeight: function() {

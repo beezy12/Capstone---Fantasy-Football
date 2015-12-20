@@ -89,7 +89,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
 
-			draftRef.set({
+			draftRef.push({
 				"players": $scope.modalPlayer.$id
 			});
 		};
