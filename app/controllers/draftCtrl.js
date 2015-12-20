@@ -50,7 +50,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
-		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/teamName");
+		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
+			console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -147,87 +148,6 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 
 				});
-
-
-
-	
-
-
-
-		
-		// teamPlayersArray.$watch(function(snapshot) { 
-
-		// 	console.log("teamPlayersArray ", teamPlayersArray);
-
-		// 	for(var i =0; i < teamPlayersArray.length; i++){
-		// 		console.log("current item is ", teamPlayersArray[i]);
-
-		// 		//if value of player id in teamPlayers assosiated with current users uid, push that playerId into arr
-		// 		if(teamPlayersArray[i].$value === generalVariables.getUid()){
-		// 			console.log("there is a match");
-		// 			arr.push(teamPlayersArray[i].$id);
-
-		// 		}
-		// 	}
-
-		// 	//call callback function here to house code below
-
-
-		// 	console.log("arr ", arr);
-
-		// 	$firebaseArray(playerRef).$loaded()
-		// 	.then(function(players){
-
-		// 		console.log("players ", players);
-
-		// 			//loop over all players who are associated with the current user's id
-		// 			for(var x = 0; x < arr.length; x++){
-
-		// 				for(var z = 0; z < players.length; z++){
-
-		// 					//if there is a match
-		// 					if(arr[x] === players[z].$id){
-		// 						$scope.benPlayers.push(players[z]);
-		// 					}
-
-		// 						//push that player object into our output array
-		// 				}
-
-		// 			}
-
-		// 	})
-		// });
-
-
-
-			// $scope.loadedPlayers
-			// 	.$loaded()
-			// 	.then(function(stuff) {
-
-			// 		// $scope.wut = $scope.loadedPlayers;
-			// 		console.log("hey snapshot ", snapshot)
-
-			// 		// arr.push(snapshot.key)
-			// 		// console.log(snapshot.val());
-		 //  			// console.log("teamPlayers changed! iterate over to update team roster");
-		 //  			console.log($scope.loadedPlayers)
-		 //  			for (var i = 0; i < arr.length; i++) {
-		 //  				for (var j = 0; j < $scope.loadedPlayers.length; j++) {
-
-		 //  					if (arr[i] === $scope.loadedPlayers[j].$id) {
-		 //  						// console.log("first ----->", arr[i])
-		 //  						// console.log("second ----->", teamPlayersArray[j].$id)
-		 //  						var tA = $scope.loadedPlayers[j];
-		 //  						draftlist.push({ displayName: tA['displayName'], team: tA['team'] })
-		 //  						console.log("yo")
-		  						
-		 //  					};	
-		 //  				}
-		 //  			}
-
-		 //  	});
-
-		// });
 
 		
 		

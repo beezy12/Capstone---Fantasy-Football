@@ -2,52 +2,22 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 	function($scope, $q, $http, $firebaseArray, $location, $rootScope, generalVariables) {
 		
 
-		var ref = new Firebase("https://capstonefootball.firebaseio.com");
+		// var ref = new Firebase("https://capstonefootball.firebaseio.com");
 
-		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
+		// var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
-		var userArray = $firebaseArray(userRef);
+		// var userArray = $firebaseArray(userRef);
 		
+		console.log("MADE IT TO HOMECTRL!!!!!");
 
-		generalVariables.checkUserLogin('home');
+		// generalVariables.checkUserLogin('home');
 
 
 
 
 		$scope.logout = function() {
-			// console.log("getting that click for logging out");
-			// // get authdata object by calling firebase method on reference created up top
-			// var authData = ref.getAuth();
-
-			// // construct new firebase reference to user data location
-			// var logRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+authData.uid);
-
-			// // unauthorize user location
-			// logRef.unauth();
-			// console.log("heard the logout here in loginCtrl");
-
-
-
 			generalVariables.logUserOut();
 		};
-
-
-		// logout functionality
-		// logout: function() {
-			
-		// 	// get authdata object by calling firebase method on reference created up top
-		// 	var authData = ref.getAuth();
-			
-		// 	// construct new firebase reference to user data location
-		// 	var userRef = new Firebase("https://movieshistory.firebaseio.com/users/" + authData.uid);
-
-		// 	// unauthorize user location
-		// 	userRef.unauth();
-			
-		// 	// display splash screen
-		// 	templates.loadSplash();
-			
-		// } // end of logout
 		
 
 

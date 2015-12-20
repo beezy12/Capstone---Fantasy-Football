@@ -27,8 +27,8 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					console.log("you messed up something", error);
 				} else {
 					console.log("you made a profile with user Id of: ", userData.uid);
-					// currentUid = userData.uid;
-					// console.log("currentUid", currentUid);
+					currentUid = userData.uid;
+					console.log("currentUid", currentUid);
 
 					generalVariables.setUid(userData.uid);
 
@@ -40,7 +40,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					
 					teamsRef.push({
 						"teamName": $scope.teamName,
-						"userId": currentUid
+						"userId": userData.uid
 					});
 
 					draftRef.child("/"+userData.uid).set({
@@ -66,31 +66,33 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 				email: $scope.loginEmail,
 				password: $scope.loginPassword
 			}, function(error, authData) {
-				if (error) {
-					console.log("you done messed up", error);
-				} else {
-					console.log("user logged in successfully with payload: ", authData);
-					generalVariables.setUid(authData.uid);
+					if (error) {
+						console.log("you done messed up", error);
+					} else {
+
+						console.log("user logged in successfully with payload: ", authData);
+						generalVariables.setUid(authData.uid);
 
 
-			// when user logs in, set online to true. when logging out, set online to false.
+			
 
-					draftRef.child("/"+authData.uid).child("online").set(true);
-					// 	"playersHere": $scope.teamName
-					// });
+						draftRef.child("/"+authData.uid).child("online").set(true);
+						// 	"playersHere": $scope.teamName
+						// });
 
-					$location.path('/home');
-					$rootScope.$apply();
-				}
-				
-
+						$location.path('/home');
+						$rootScope.$apply();
+					}
+				},
+			{
+				remember: "sessionOnly"
 			});
 		};
 
 		// generalVariables.checkUserLogin();
 		// console.log("method checkUserLogin fired....not sure if it's in the right spot");
 
-		
+
 
 
 	}]);

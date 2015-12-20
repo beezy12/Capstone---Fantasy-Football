@@ -5,21 +5,22 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 		// var pathName;
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
 
-
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
 
+
 		return {
+
+			// MAYBE DO A PROMISE HERE TO FIX THE REGISTERING PROBLEM??
 
 			checkUserLogin : function(pathName){
           		ref.onAuth(function(authData) {
               		if (authData) {
-                		console.log("Authenticated with uid:", authData.uid);
+                		console.log("Im checking user login: Authenticated with uid:", authData.uid);
               			userUid = authData.uid;
                 		$location.path("/"+pathName);
-                		// $location.path("/home");
-               			//if user is not logged in, redirect to login page
+                
               			} else {
-                			console.log("Client unauthenticated.");
+                			console.log("Client unauthenticated. why is it automatically doing this???");
                 			$location.path("/splash");
               			}
            		});
@@ -37,8 +38,6 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 			},
 
 			logUserOut: function() {
-
-				
 				var authData = ref.getAuth();
 
 				var newRef = new Firebase("https://capstonefootball.firebaseio.com/"+authData.uid);
@@ -60,3 +59,5 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 
 
 	}]);
+
+				
