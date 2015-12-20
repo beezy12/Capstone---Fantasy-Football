@@ -17,29 +17,29 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		
 
-// 		var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
+		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
 		
 
-// 		var apiCall = $q(function(resolve, reject){
-// 			$http.get("http://www.fantasyfootballnerd.com/service/draft-rankings/json/j8vrkn628sv6/1/").success(
-// 			function(object) {
-// 				console.log("got this back from api -->", object);
-// 				resolve(object);
-// 			});
-// 		});
+		// var apiCall = $q(function(resolve, reject){
+		// 	$http.get("http://www.fantasyfootballnerd.com/service/draft-rankings/json/j8vrkn628sv6/1/").success(
+		// 	function(object) {
+		// 		console.log("got this back from api -->", object);
+		// 		resolve(object);
+		// 	});
+		// });
 		
-// 		 //KEEP THIS. THIS IS WHERE I SET EACH PLAYER'S DRAFTED TO FALSE.
-// 		apiCall.then(function(data){
-// 			console.log("data is ", data.DraftRankings);
+		//  //KEEP THIS. THIS IS WHERE I SET EACH PLAYER'S DRAFTED TO FALSE.
+		// apiCall.then(function(data){
+		// 	console.log("data is ", data.DraftRankings);
 			
-// 			for (var i = 0; i < data.DraftRankings.length ; i++){
-// 				console.log("what the fruit");
-// 				 console.log("Current Balla status is ", data.DraftRankings[i]);
-// 				 data.DraftRankings[i].drafted = false;
-// 				 playerRef.push(data.DraftRankings[i]);
+		// 	for (var i = 0; i < data.DraftRankings.length ; i++){
+		// 		console.log("what the fruit");
+		// 		 console.log("Current Balla status is ", data.DraftRankings[i]);
+		// 		 data.DraftRankings[i].drafted = false;
+		// 		 playerRef.push(data.DraftRankings[i]);
 				 
-// 			}
-// 		});
+		// 	}
+		// });
 
 
 // // ***************************************************************************************************
@@ -50,6 +50,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
+		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/teamName");
+
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
 
@@ -67,13 +69,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				$scope.loadedPlayers = playerArray;
 			});
 
-		//set draftPlayer id
+		// gets selected player's id and sets it to $scope.modalPlayer
 		$scope.do = function(yo) {
 			var players = $scope.loadedPlayers;
 			for (var i=0; i < players.length; i++){
 				if (yo === players[i].$id) {
 					$scope.modalPlayer = players[i];
-					// console.log("players[i]", players[i]);
 				}
 			}
 		};
@@ -86,6 +87,11 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			//get ref to player's 'drafted' key, set 'drafted' to true
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
+
+
+			draftRef.set({
+				"players": $scope.modalPlayer.$id
+			});
 		};
 
 
@@ -104,11 +110,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						
 
 						for(var s = 0; s < draftedPlayers.length; s++) {
-							_.filter(allPlayers, function(index) {
-								if(draftedPlayers[s].$id ===  index.$id && draftedPlayers[s].$value === currentUid) {
-									$scope.myPlayers.push(index);
+							for(var x = 0; x < allPlayers.length; x++) {
+
+								if(draftedPlayers[s].$id ===  allPlayers[x].$id && draftedPlayers[s].$value === currentUid) {
+									$scope.myPlayers.push(allPlayers[x]);
 								}
-							});
+							}
 						}
 										
 
@@ -127,19 +134,16 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 									_.filter(playersReturned, function(index){
 										if(index.$id === snapshot.key  && draftedPlayers[s].$value === currentUid){
 											$scope.myPlayers.push(index);
-											
-											
-
 										}
-									})
-								})
+									});
+								});
 							}
 
 
 						});
 
 						
-					})
+					});
 
 
 				});
@@ -244,4 +248,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			
 								
 		
+
+
+							
+							
+											
+											
 

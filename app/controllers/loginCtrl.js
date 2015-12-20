@@ -14,6 +14,8 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		var teamsRef = new Firebase("https://capstonefootball.firebaseio.com/teams");
 		console.log("teamsRef: ", teamsRef);
 
+		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+
 		$scope.registerUser = function() {
 			ref.createUser({
 				email: $scope.loginEmail,
@@ -31,11 +33,17 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 						"teamName": $scope.teamName
 					});
 
-					// ref.child("/"+userData.uid.team)
+					
 					teamsRef.push({
 						"teamName": $scope.teamName,
 						"userId": currentUid
 					});
+
+					draftRef.child("/"+userData.uid).push({
+						"teamName": $scope.teamName,
+						"online": true
+					});
+						
 
 					$location.path('/home');
 					$rootScope.$apply();
@@ -44,7 +52,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		};
 
 
-	
+	// playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
 
 		$scope.loginUser = function() {
@@ -59,6 +67,14 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 				} else {
 					console.log("user logged in successfully with payload: ", authData);
 					generalVariables.setUid(authData.uid);
+
+
+			// when user logs in, set online to true. when logging out, set online to false.
+
+					// draftRef.child("/"+authData.uid).set({
+					// 	"playersHere": $scope.teamName
+					// });
+
 					$location.path('/home');
 					$rootScope.$apply();
 				}
