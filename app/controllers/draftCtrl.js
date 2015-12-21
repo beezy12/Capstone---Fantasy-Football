@@ -51,7 +51,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
-			console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
+			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
 		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
 
@@ -163,11 +163,11 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 					$scope.onlineUsers = onlineArray;
 					console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
-					for (var i = 0; i < $scope.onlineUsers; i++) {
-						if ($scope.onlineUsers[i].child("online") === true) {
-							usersReadyToDraft.push($scope.onlineUsers[i]);
-							console.log("online users team name ------>>>>", $scope.onlineUsers[i]);
-						}
+					for (var i = 0; i < $scope.onlineUsers.length; i++) {
+						//if ($scope.onlineUsers[i].child("online") === true) {
+							usersReadyToDraft.push($scope.onlineUsers[i].teamName);
+							console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
+						//}
 					}
 				});
 			

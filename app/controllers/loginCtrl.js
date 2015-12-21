@@ -71,6 +71,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					} else {
 
 						console.log("user logged in successfully with payload: ", authData);
+						
 						generalVariables.setUid(authData.uid);
 
 
@@ -95,7 +96,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 
 
-	}]);
+}]);
 
 
 
