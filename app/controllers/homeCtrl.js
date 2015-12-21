@@ -10,7 +10,8 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 		
 		console.log("MADE IT TO HOMECTRL!!!!!");
 
-		// generalVariables.checkUserLogin('home');
+		generalVariables.getUid();
+		generalVariables.checkUserLogin('home');
 
 
 

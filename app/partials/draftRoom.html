@@ -13,14 +13,8 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12 draftTeams">
-
-          <ul>
-            <li>team 1</li>
-            <li>team 2</li>
-            <li>team 3</li>
-            <li>team 4</li>
-          </ul>
+        <div class="col-md-12 draftTeams" ng-repeat="user in usersReadyToDraft">
+          <p>{{user.teamName}}</p>
 
         </div>
       </div>

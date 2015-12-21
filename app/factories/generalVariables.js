@@ -14,9 +14,11 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 
 			checkUserLogin : function(pathName){
           		ref.onAuth(function(authData) {
+          			console.log("THERE IS AUTHDATA DAMMIT =========");
               		if (authData) {
                 		console.log("Im checking user login: Authenticated with uid:", authData.uid);
               			userUid = authData.uid;
+              			console.log("userUid here in generalVariables", userUid);
                 		$location.path("/"+pathName);
                 
               			} else {
@@ -43,9 +45,8 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				var newRef = new Firebase("https://capstonefootball.firebaseio.com/"+authData.uid);
 				newRef.unauth();
 
-				draftRef.child("/"+userUid).set({
-						"online": false
-					});
+				//draftRef.child("/"+userUid).set({
+				draftRef.child("/"+userUid).update({"online": false});
 
 				console.log("user" + newRef + " was logged out");
 			},

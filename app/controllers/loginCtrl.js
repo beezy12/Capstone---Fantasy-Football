@@ -38,7 +38,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					});
 
 					
-					teamsRef.push({
+					teamsRef.set({
 						"teamName": $scope.teamName,
 						"userId": userData.uid
 					});

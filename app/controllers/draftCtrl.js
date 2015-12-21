@@ -53,6 +53,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
 			console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
+		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
 
@@ -149,8 +151,28 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 				});
 
-		
-		
+
+			var usersReadyToDraft = [];
+			console.log("usersReadyToDraft array right here", usersReadyToDraft);
+
+			var onlineArray = $firebaseArray(onlineRef);
+
+			onlineArray
+				.$loaded()
+				.then(function(online) {
+					$scope.onlineUsers = onlineArray;
+					console.log("$scope.onlineUsers READY", $scope.onlineUsers);
+
+					for (var i = 0; i < $scope.onlineUsers; i++) {
+						if ($scope.onlineUsers[i].child("online") === true) {
+							usersReadyToDraft.push($scope.onlineUsers[i]);
+							console.log("online users team name ------>>>>", $scope.onlineUsers[i]);
+						}
+					}
+				});
+			
+
+			
 		
 
 
