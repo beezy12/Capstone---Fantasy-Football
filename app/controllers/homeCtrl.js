@@ -7,11 +7,15 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 		// var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
 		// var userArray = $firebaseArray(userRef);
-		
 		console.log("MADE IT TO HOMECTRL!!!!!");
 
 		//generalVariables.getUid();
 		generalVariables.checkUserLogin('home');
+
+
+
+		$scope.playersList = generalVariables.getPlayers();
+		console.log("what players did I get back???", $scope.playersList);
 
 
 

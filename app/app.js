@@ -18,11 +18,11 @@ app.config(['$routeProvider',
 			})
 			.when('/team', {
 				templateUrl: './app/partials/team.html',
-				controller: 'draftCtrl'
+				controller: 'teamCtrl'
 			})
 			.when('/players', {
 				templateUrl: './app/partials/players.html',
-				controller: 'draftCtrl'
+				controller: 'playersCtrl'
 			});
 	}]);
 

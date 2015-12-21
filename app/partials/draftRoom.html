@@ -14,7 +14,7 @@
 
       <div class="row">
         <div class="col-md-12 draftTeams" ng-repeat="user in usersReadyToDraft">
-          <p>{{user.teamName}}</p>
+          <p>{{user}}</p>
 
         </div>
       </div>
@@ -51,11 +51,11 @@
 		</div>
 
 		<div class="col-md-3 draft">
-			<select class="form-control">
-				<option>Team 1</option>
+			<select class="form-control" ng-model="currentUser" ng-options="user.name for user in users">
+
 			</select>
 
-			<div>
+			<div ng-repeat="team in teams | filter: currentUser.id">
 				show team's roster from dropdown
 			</div>
 		</div>

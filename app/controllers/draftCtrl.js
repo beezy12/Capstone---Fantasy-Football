@@ -5,6 +5,20 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		window._ = _;
 
+
+		$scope.users  = [
+			{
+				name: "Luke",
+				id: "fdkjsfhadsufhkasdjfhkas",
+				order: "first"
+			},
+			{
+				name: "Joe",
+				id: "jdsfjaian,wdsg",
+				order: "last"
+			}
+		];
+
 		generalVariables.checkUserLogin('draft');
 		
 		// get the logged in userId and set it to var currentUid
@@ -117,6 +131,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 								if(draftedPlayers[s].$id ===  allPlayers[x].$id && draftedPlayers[s].$value === currentUid) {
 									$scope.myPlayers.push(allPlayers[x]);
+
+									generalVariables.setPlayers(allPlayers[x]);
+									console.log("allPlayers[x]", allPlayers[x]);
+									
 								}
 							}
 						}
@@ -152,8 +170,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				});
 
 
-			var usersReadyToDraft = [];
-			console.log("usersReadyToDraft array right here", usersReadyToDraft);
+			$scope.usersReadyToDraft = [];
+			//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
 
 			var onlineArray = $firebaseArray(onlineRef);
 
@@ -164,10 +182,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 					console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
 					for (var i = 0; i < $scope.onlineUsers.length; i++) {
-						//if ($scope.onlineUsers[i].child("online") === true) {
-							usersReadyToDraft.push($scope.onlineUsers[i].teamName);
+						if ($scope.onlineUsers[i].online === true) {
+							console.log("aoteuhasneuhasteohusateuh");
+							$scope.usersReadyToDraft.push($scope.onlineUsers[i].teamName);
+							console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
 							console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
-						//}
+						}
 					}
 				});
 			

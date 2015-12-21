@@ -1,11 +1,14 @@
-app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
+app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope", 
 	function($q, $http, $location, $rootScope) {
 
 		var userUid;
-		// var pathName;
+		
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
-
+		//var authData = ref.getAuth();
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+
+		var playersList = [];
+		console.log("playersList in factory ********", playersList);
 
 
 		return {
@@ -14,7 +17,9 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 
 			checkUserLogin : function(pathName){
           		ref.onAuth(function(authData) {
+
           			console.log("THERE IS AUTHDATA DAMMIT =========");
+          			console.log(authData);
               		if (authData) {
                 		console.log("Im checking user login: Authenticated with uid:", authData.uid);
               			userUid = authData.uid;
@@ -25,7 +30,9 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
                 			console.log("Client unauthenticated. why is it automatically doing this???");
                 			$location.path("/splash");
               			}
+              		
            		});
+
       		},
                  
 
@@ -36,6 +43,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 
 			setUid: function(value) {
 				userUid = value;
+				//checkUserLogin(userUid);
 				console.log("userUid is set", userUid);
 			},
 
@@ -45,20 +53,26 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				var newRef = new Firebase("https://capstonefootball.firebaseio.com/"+authData.uid);
 				newRef.unauth();
 
-				//draftRef.child("/"+userUid).set({
+				
 				draftRef.child("/"+userUid).update({"online": false});
 
 				console.log("user" + newRef + " was logged out");
 			},
 
-			// setHeight: function() {
-			// 	$("body").css({"height":$(window).height()});
-			// }
+			setPlayers: function(guy) {
+				playersList.push(guy);
+				console.log("setting playersList here in generalVariables", playersList);
+			},
+
+			getPlayers: function() {
+				console.log("calling getPlayers function in factory");
+				return playersList;
+			}
 
 		};
 	
 
 
-	}]);
+}]);
 
 				

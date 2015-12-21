@@ -26,11 +26,14 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 				if (error) {
 					console.log("you messed up something", error);
 				} else {
+					console.log("userData check-----", userData);
 					console.log("you made a profile with user Id of: ", userData.uid);
 					currentUid = userData.uid;
 					console.log("currentUid", currentUid);
 
 					generalVariables.setUid(userData.uid);
+
+
 
 					userRef.child("/"+userData.uid).set({
 						"firstName": $scope.firstName,
