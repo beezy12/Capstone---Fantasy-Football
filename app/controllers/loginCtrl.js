@@ -37,7 +37,8 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 					userRef.child("/"+userData.uid).set({
 						"firstName": $scope.firstName,
-						"teamName": $scope.teamName
+						"teamName": $scope.teamName,
+						"online": true
 					});
 
 					

@@ -5,7 +5,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 		
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
 		//var authData = ref.getAuth();
-		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
 		var playersList = [];
 		console.log("playersList in factory ********", playersList);
@@ -54,7 +54,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				newRef.unauth();
 
 				
-				draftRef.child("/"+userUid).update({"online": false});
+				userRef.child("/"+userUid).update({"online": false});
 
 				console.log("user" + newRef + " was logged out");
 			},
