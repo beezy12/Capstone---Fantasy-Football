@@ -52,7 +52,7 @@
 
 		<div class="col-md-3 draft">
 			<select class="form-control" ng-model="currentUser" ng-options="user.name for user in users">
-
+        <option></option>
 			</select>
 
 			<div ng-repeat="team in teams | filter: currentUser.id">
@@ -60,9 +60,10 @@
 			</div>
 		</div>
 
-		<!-- div>
-			chat room here
-		</div> -->
+		
+
+
+
 
         <!--  confirm cancel Modal -->
     <div id="confirmDraft" class="modal fade" role="dialog">

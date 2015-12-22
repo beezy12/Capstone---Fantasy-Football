@@ -64,10 +64,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
-		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
+		// var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
-		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -106,9 +106,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
 
-			draftRef.push({
-				"players": $scope.modalPlayer.$id
-			});
+			// draftRef.push({
+			// 	"players": $scope.modalPlayer.$id
+			// });
 		};
 
 
@@ -173,20 +173,18 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			$scope.usersReadyToDraft = [];
 			//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
 
-			var onlineArray = $firebaseArray(onlineRef);
+			var userArray = $firebaseArray(userRef);
 
-			onlineArray
+			userArray
 				.$loaded()
 				.then(function(online) {
-					$scope.onlineUsers = onlineArray;
+					$scope.onlineUsers = userArray;
 					console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
 					for (var i = 0; i < $scope.onlineUsers.length; i++) {
 						if ($scope.onlineUsers[i].online === true) {
-							console.log("aoteuhasneuhasteohusateuh");
 							$scope.usersReadyToDraft.push($scope.onlineUsers[i].teamName);
-							console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
-							console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
+							
 						}
 					}
 				});
@@ -199,21 +197,4 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				
 }]);
 
-
-
-
-			
-
-
-
-
-			
-								
-		
-
-
-							
-							
-											
-											
 

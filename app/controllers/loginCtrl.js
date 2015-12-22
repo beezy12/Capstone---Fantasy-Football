@@ -42,15 +42,15 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					});
 
 					
-					teamsRef.set({
-						"teamName": $scope.teamName,
-						"userId": userData.uid
-					});
+					// teamsRef.set({
+					// 	"teamName": $scope.teamName,
+					// 	"userId": userData.uid
+					// });
 
-					draftRef.child("/"+userData.uid).set({
-						"teamName": $scope.teamName,
-						"online": true
-					});
+					// draftRef.child("/"+userData.uid).set({
+					// 	"teamName": $scope.teamName,
+					// 	"online": true
+					// });
 						
 
 					$location.path('/home');
@@ -79,11 +79,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 						generalVariables.setUid(authData.uid);
 
 
-			
-
-						draftRef.child("/"+authData.uid).child("online").set(true);
-						// 	"playersHere": $scope.teamName
-						// });
+						userRef.child("/"+authData.uid).child("online").set(true);
 
 						$location.path('/home');
 						$rootScope.$apply();
