@@ -6,24 +6,24 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		window._ = _;
 
 
-		$scope.users  = [
-			{
-				name: "Luke",
-				id: "fdkjsfhadsufhkasdjfhkas",
-				order: "first"
-			},
-			{
-				name: "Joe",
-				id: "jdsfjaian,wdsg",
-				order: "last"
-			}
-		];
+		// $scope.users  = [
+		// 	{
+		// 		name: "Luke",
+		// 		id: "fdkjsfhadsufhkasdjfhkas",
+		// 		order: "first"
+		// 	},
+		// 	{
+		// 		name: "Joe",
+		// 		id: "jdsfjaian,wdsg",
+		// 		order: "last"
+		// 	}
+		// ];
 
 		generalVariables.checkUserLogin('draft');
 		
 		// get the logged in userId and set it to var currentUid
 		var currentUid = generalVariables.getUid();
-		console.log("currentUid that gets logged when draft page loads ----->", currentUid);
+		// console.log("currentUid that gets logged when draft page loads ----->", currentUid);
 
 
 // 		// *********************** USE THIS TO POPULATE DRAFT PLAYERS LIST ****************************************************************
@@ -64,7 +64,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 		
-		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
+		//var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
 		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
@@ -100,15 +100,15 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		//push playerid:userId to teamPlayers in firebase
 		$scope.draftPlayer = function() {
 			teamPlayersRef.child($scope.modalPlayer.$id).set(generalVariables.getUid());
-			console.log("teamPlayersRef.child($scope.modalPlayer.$id) -----> here", teamPlayersRef);
+			//console.log("teamPlayersRef.child($scope.modalPlayer.$id) -----> here", teamPlayersRef);
 
 			//get ref to player's 'drafted' key, set 'drafted' to true
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
 
-			draftRef.push({
-				"players": $scope.modalPlayer.$id
-			});
+			// draftRef.push({
+			// 	"players": $scope.modalPlayer.$id
+			// });
 		};
 
 
@@ -132,8 +132,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 								if(draftedPlayers[s].$id ===  allPlayers[x].$id && draftedPlayers[s].$value === currentUid) {
 									$scope.myPlayers.push(allPlayers[x]);
 
-									generalVariables.setPlayers(allPlayers[x]);
-									console.log("allPlayers[x]", allPlayers[x]);
+									//generalVariables.setPlayers(allPlayers[x]);
+									//console.log("allPlayers[x]", allPlayers[x]);
 									
 								}
 							}
@@ -179,14 +179,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				.$loaded()
 				.then(function(online) {
 					$scope.onlineUsers = onlineArray;
-					console.log("$scope.onlineUsers READY", $scope.onlineUsers);
+					//console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
 					for (var i = 0; i < $scope.onlineUsers.length; i++) {
 						if ($scope.onlineUsers[i].online === true) {
-							console.log("aoteuhasneuhasteohusateuh");
+							
 							$scope.usersReadyToDraft.push($scope.onlineUsers[i].teamName);
-							console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
-							console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
+							// console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
+							// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
 						}
 					}
 				});

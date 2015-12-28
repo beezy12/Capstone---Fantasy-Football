@@ -18,16 +18,16 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 			checkUserLogin : function(pathName){
           		ref.onAuth(function(authData) {
 
-          			console.log("THERE IS AUTHDATA DAMMIT =========");
-          			console.log(authData);
+          			// console.log("THERE IS AUTHDATA DAMMIT =========");
+          			// console.log(authData);
               		if (authData) {
-                		console.log("Im checking user login: Authenticated with uid:", authData.uid);
+                		//console.log("Im checking user login: Authenticated with uid:", authData.uid);
               			userUid = authData.uid;
-              			console.log("userUid here in generalVariables", userUid);
+              			//console.log("userUid here in generalVariables", userUid);
                 		$location.path("/"+pathName);
                 
               			} else {
-                			console.log("Client unauthenticated. why is it automatically doing this???");
+                			//console.log("Client unauthenticated. why is it automatically doing this???");
                 			$location.path("/splash");
               			}
               		
@@ -37,14 +37,14 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
                  
 
 			getUid: function() {
-				console.log("uid is ", userUid);
+				//console.log("uid is ", userUid);
 				return userUid;
 			},
 
 			setUid: function(value) {
 				userUid = value;
 				//checkUserLogin(userUid);
-				console.log("userUid is set", userUid);
+				//console.log("userUid is set", userUid);
 			},
 
 			logUserOut: function() {
@@ -56,7 +56,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				
 				userRef.child("/"+userUid).update({"online": false});
 
-				console.log("user" + newRef + " was logged out");
+				//console.log("user" + newRef + " was logged out");
 			},
 
 			setPlayers: function(guy) {

@@ -29,7 +29,10 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="draftMyTeam">
-				<table class="leagueTable">
+        <div class="draftBoxes" ng-repeat="player in myPlayers">{{player.displayName}} - {{player.position}}- {{player.team}}</div>
+
+
+				<!-- <table class="leagueTable">
             	<tr class="leagueTable">
                     <td class="leagueTable">Player</td>
                     <td class="leagueTable">Position</td>
@@ -65,7 +68,7 @@
                     <td class="leagueTable">Position</td>
                     <td class="leagueTable">Stats</td>
                 </tr>
-            </table>
+            </table> -->
 			</div>
 		</div>
 	</div>

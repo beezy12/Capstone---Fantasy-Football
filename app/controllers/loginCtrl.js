@@ -11,10 +11,10 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		
 
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
-		console.log("userRef is ", userRef);
+		//console.log("userRef is ", userRef);
 
 		var teamsRef = new Firebase("https://capstonefootball.firebaseio.com/teams");
-		console.log("teamsRef: ", teamsRef);
+		//console.log("teamsRef: ", teamsRef);
 
 		var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
 
@@ -26,10 +26,10 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 				if (error) {
 					console.log("you messed up something", error);
 				} else {
-					console.log("userData check-----", userData);
+					//console.log("userData check-----", userData);
 					console.log("you made a profile with user Id of: ", userData.uid);
 					currentUid = userData.uid;
-					console.log("currentUid", currentUid);
+					//console.log("currentUid", currentUid);
 
 					generalVariables.setUid(userData.uid);
 
@@ -42,15 +42,15 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					});
 
 					
-					teamsRef.set({
-						"teamName": $scope.teamName,
-						"userId": userData.uid
-					});
+					// teamsRef.set({
+					// 	"teamName": $scope.teamName,
+					// 	"userId": userData.uid
+					// });
 
-					draftRef.child("/"+userData.uid).set({
-						"teamName": $scope.teamName,
-						"online": true
-					});
+					// draftRef.child("/"+userData.uid).set({
+					// 	"teamName": $scope.teamName,
+					// 	"online": true
+					// });
 						
 
 					$location.path('/home');
@@ -64,7 +64,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 
 		$scope.loginUser = function() {
-			console.log("hear that ol sign in button being clicked");
+			//console.log("hear that ol sign in button being clicked");
 
 			userRef.authWithPassword({
 				email: $scope.loginEmail,
@@ -74,7 +74,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 						console.log("you done messed up", error);
 					} else {
 
-						console.log("user logged in successfully with payload: ", authData);
+						//console.log("user logged in successfully with payload: ", authData);
 						
 						generalVariables.setUid(authData.uid);
 
