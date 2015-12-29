@@ -81,7 +81,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 			
 
-						draftRef.child("/"+authData.uid).child("online").set(true);
+						userRef.child("/"+authData.uid).child("online").set(true);
 						// 	"playersHere": $scope.teamName
 						// });
 

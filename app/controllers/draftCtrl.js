@@ -67,7 +67,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		//var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
-		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/draftList");
+		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -169,27 +169,101 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 				});
 
+		
+		
+		// here is where I keep track of what teams are online
+		
+		$scope.usersReadyToDraft = [];
+		//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
 
-			$scope.usersReadyToDraft = [];
-			//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
+		var onlineArray = $firebaseArray(onlineRef);
 
-			var onlineArray = $firebaseArray(onlineRef);
+		onlineArray
+			.$loaded()
+			.then(function(online) {
+				$scope.onlineUsers = online;
+				// *********** had this as $scope.onlineUsers = onlineArray.....but that didn't seem 
+				// right. So I changed it to just say online....so now Im using the promise.
 
-			onlineArray
-				.$loaded()
-				.then(function(online) {
-					$scope.onlineUsers = onlineArray;
-					//console.log("$scope.onlineUsers READY", $scope.onlineUsers);
+				//console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
-					for (var i = 0; i < $scope.onlineUsers.length; i++) {
-						if ($scope.onlineUsers[i].online === true) {
-							
-							$scope.usersReadyToDraft.push($scope.onlineUsers[i].teamName);
-							// console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
-							// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
-						}
+				for (var i = 0; i < $scope.onlineUsers.length; i++) {
+					if ($scope.onlineUsers[i].online === true) {
+						
+						$scope.usersReadyToDraft.push($scope.onlineUsers[i]);
+						console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
+						// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
+					}
+				}
+
+
+				onlineArray.$watch(function(snapshot) { 
+					console.log("sneeepshot", snapshot);
+
+					if(snapshot.event === "child_changed") {
+						//if child changed
+							//take the uid of child changed
+							//go into firebase users object/ then into child object with the uid of child changed
+							//get that object
+							// if online = true
+								//push object into $scope.usersReadyToDraft array
+							//else
+								//(this else will fire if online is = false)
+								//log this user aint online
+
+
+
 					}
 				});
+
+				console.log("users online", $scope.usersReadyToDraft);
+
+			});  // end of the .$loaded .then
+
+		$scope.giveButt = function(team){
+
+			console.log("team ", team);
+
+		}
+
+		$scope.outputOtherTeam = function(teamName){
+			console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
+			var filteredUser = [];
+			var filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
+			$scope.filteredPlayers=[];
+			//take filtered user,
+			console.log("filtered users id", filteredUser[0].$id );
+			$firebaseArray(playerRef).$loaded()
+			.then(function(listOfPlayers){
+				var zPlayersList = listOfPlayers;
+
+				//look at players associated with that user
+				var newUserRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+ filteredUser[0].$id);
+				$firebaseArray(newUserRef).$loaded().
+				then(function(playas){
+					console.log("playas ", playas);
+					for(var i = 0; i< playas.length; i++){
+						console.log("plays[i]", playas[i]);
+						//id of player we are looking for is in playas[i].$id
+						for(var p = 0; p < zPlayersList.length; p++){
+							if(zPlayersList[p].$id === playas[i].$id && playas[i].$value === filteredUser[0].$id){
+								console.log("we have a matches ", playas[i]);
+								$scope.filteredPlayers.push(zPlayersList[p]);
+							}
+						}
+
+
+					}
+
+					console.log("filteredPlayers", $scope.filteredPlayers);
+
+				});
+
+			});
+			// output all players assc with that user
+				
+
+		}
 			
 
 			

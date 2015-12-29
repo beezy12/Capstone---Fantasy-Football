@@ -14,7 +14,7 @@
 
       <div class="row">
         <div class="col-md-12 draftTeams" ng-repeat="user in usersReadyToDraft">
-          <p>{{user}}</p>
+          <p>{{user.teamName}}</p>
 
         </div>
       </div>
@@ -42,22 +42,26 @@
 			my team roster here
 			<div class="draftMyTeam">
           <div ng-repeat="player in myPlayers" class="animated bounce">
-            <div class="draftBoxes">
-              {{player.displayName}} - {{player.position}} - {{player.team}}
-            </div>
+            <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
           </div>
 				
 			</div>
 		</div>
 
-		<div class="col-md-3 draft">
-			<select class="form-control" ng-model="currentUser" ng-options="user.name for user in users">
 
+    <!-- ng-options="user.name for user in users     (LUKE HAD THIS IN THE SELECT, BUT I TOOK IT OUT)-->
+
+		<div class="col-md-3 draft">
+			<select id="teamSelect" class="form-control" ng-model="teamSelected" ng-change="outputOtherTeam(teamSelected)">
+        <option></option>
+        <option ng-repeat="team in usersReadyToDraft">{{team.teamName}}</option>
 			</select>
 
-			<div ng-repeat="team in teams | filter: currentUser.id">
+      <p ng-repeat="team in usersReadyToDraft">Butt: {{team.teamName}} <button class="btn" ng-click="giveButt(team)"></button>
+      </p>
 
-			</div>
+			<div ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
+      
 		</div>
 
 		<!-- div>

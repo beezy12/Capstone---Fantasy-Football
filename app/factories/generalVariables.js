@@ -7,8 +7,8 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 		//var authData = ref.getAuth();
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
-		var playersList = [];
-		console.log("playersList in factory ********", playersList);
+		// var playersList = [];
+		// console.log("playersList in factory ********", playersList);
 
 
 		return {
