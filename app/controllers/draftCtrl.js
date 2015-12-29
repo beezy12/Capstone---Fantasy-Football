@@ -6,6 +6,13 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		window._ = _;
 
 
+		// use this to 
+		// $rootscope.userCanChoose = true;
+		// if this is true, ng-disabled = falsey or something like that
+		// disable the zplayerlist div
+
+
+
 		// $scope.users  = [
 		// 	{
 		// 		name: "Luke",
@@ -220,16 +227,13 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			});  // end of the .$loaded .then
 
-		$scope.giveButt = function(team){
-
-			console.log("team ", team);
-
-		}
+		
 
 		$scope.outputOtherTeam = function(teamName){
-			console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
+			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
 			var filteredUser = [];
 			var filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
+			console.log("filteredUser =====>>>>", filteredUser);
 			$scope.filteredPlayers=[];
 			//take filtered user,
 			console.log("filtered users id", filteredUser[0].$id );
@@ -239,8 +243,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 				//look at players associated with that user
 				var newUserRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+ filteredUser[0].$id);
-				$firebaseArray(newUserRef).$loaded().
-				then(function(playas){
+				$firebaseArray(newUserRef).$loaded()
+				.then(function(playas){
 					console.log("playas ", playas);
 					for(var i = 0; i< playas.length; i++){
 						console.log("plays[i]", playas[i]);

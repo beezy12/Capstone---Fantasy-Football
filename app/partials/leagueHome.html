@@ -33,26 +33,15 @@
    		<div class="col-md-3 col-md-offset-2">
    			<h3>League Standings</h3>
             <table class="leagueTable">
-            	<tr class="leagueTable">
+            	<!-- <tr class="leagueTable">
                     <td class="leagueTable">Division 1</td>
                     <td class="leagueTable">Division 2</td>
+                </tr> -->
+                <tr class="leagueTable" ng-repeat="team in userTeams">
+                    <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.teamName}}</a></td>
                 </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"><a href="">Team 1</a></td>
-                    <td class="leagueTable"><a href="">Team 2</a></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"><a href="">Team 3</a></td>
-                    <td class="leagueTable"><a href="">Team 4</a></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"><a href="">Team 5</a></td>
-                    <td class="leagueTable"><a href="">Team 6</a></td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable"><a href="">Team 7</a></td>
-                    <td class="leagueTable"><a href="">Team 8</a></td>
-                </tr>
+                    
+                
             </table>
    		</div>
 

@@ -20,9 +20,9 @@ app.config(['$routeProvider',
 				templateUrl: './app/partials/team.html',
 				controller: 'teamCtrl'
 			})
-			.when('/players', {
-				templateUrl: './app/partials/players.html',
-				controller: 'playersCtrl'
+			.when('/players/:playerId', {
+				templateUrl: './app/partials/usersTeams.html',
+				controller: 'userTeamsCtrl'
 			});
 	}]);
 
