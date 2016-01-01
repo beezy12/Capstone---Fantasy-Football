@@ -4,7 +4,7 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 
 		// var ref = new Firebase("https://capstonefootball.firebaseio.com");
 
-		$scope.userTeams;
+		$scope.userTeams = '';
 
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 		$firebaseArray(userRef).$loaded()
@@ -12,7 +12,7 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 			console.log("usersHere ---->", usersHere);
 			$scope.userTeams = usersHere;
 			console.log("$scope.userTeams----", $scope.userTeams);
-		})
+		});
 
 		// var userArray = $firebaseArray(userRef);
 		//console.log("MADE IT TO HOMECTRL!!!!!");

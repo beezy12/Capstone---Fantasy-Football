@@ -1,11 +1,11 @@
-app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables",
-	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables) {
+app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope",
+	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope) {
 
 		// generalVariables.setHeight();
 
 		window._ = _;
 
-
+		$rootScope.started = false;
 		// use this to 
 		// $rootscope.userCanChoose = true;
 		// if this is true, ng-disabled = falsey or something like that
@@ -86,7 +86,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		var playerArray = $firebaseArray(playerRef);
 		
 
-
+		// gets the $firebaseArray version of the zplayersRef, called playerArray, and loads into a $scope
+		// variable called $scope.loadedPlayers. 
 		playerArray
 			.$loaded()
 			.then(function(data) {
@@ -94,10 +95,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			});
 
 		// gets selected player's id and sets it to $scope.modalPlayer
-		$scope.do = function(yo) {
+		$scope.getPlayerId = function(playerId) {
 			var players = $scope.loadedPlayers;
-			for (var i=0; i < players.length; i++){
-				if (yo === players[i].$id) {
+			for (var i = 0; i < players.length; i++) {
+				if (playerId === players[i].$id) {
 					$scope.modalPlayer = players[i];
 				}
 			}
@@ -113,9 +114,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
 
-			// draftRef.push({
-			// 	"players": $scope.modalPlayer.$id
-			// });
+			
 		};
 
 
@@ -207,7 +206,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				onlineArray.$watch(function(snapshot) { 
 					console.log("sneeepshot", snapshot);
 
-					if(snapshot.event === "child_changed") {
+					if(snapshot.event === "child_added" ){
+						//console.log('yooooo');
 						//if child changed
 							//take the uid of child changed
 							//go into firebase users object/ then into child object with the uid of child changed
@@ -223,7 +223,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 					}
 				});
 
-				console.log("users online", $scope.usersReadyToDraft);
+				//console.log("users online", $scope.usersReadyToDraft);
 
 			});  // end of the .$loaded .then
 
@@ -232,7 +232,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		$scope.outputOtherTeam = function(teamName){
 			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
 			var filteredUser = [];
-			var filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
+			filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
 			console.log("filteredUser =====>>>>", filteredUser);
 			$scope.filteredPlayers=[];
 			//take filtered user,
@@ -267,13 +267,36 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			// output all players assc with that user
 				
 
+		};
+			
+
+		var i = 0;
+		var prevPlayer = $scope.usersReadyToDraft[i - 1];
+		var currentPlayer = $scope.usersReadyToDraft[i];
+		console.log(currentPlayer)
+		$scope.startDraft = function() {
+			if (currentPlayer) {
+				currentPlayer['is_turn'] = true;
+			
+			console.log("draft has started, it's this player's turn: ", currentPlayer);
+			return currentPlayer
+			}
+		};
+
+		function incrementPlayerIndex() {
+			++i
+			if (currentPlayer) {
+				console.log($scope.usersReadyToDraft[i])
+				prevPlayer['is_turn'] = false
+				currentPlayer['is_turn'] = true
+			}
+ 			return i
 		}
-			
 
-			
-		
-
-
+		$scope.yo = function() {
+			var good = incrementPlayerIndex()
+			console.log(good)
+		};
 				
 }]);
 

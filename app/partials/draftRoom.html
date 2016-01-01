@@ -12,9 +12,18 @@
           <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
       </div>
 
+      <div class="col-md-2">
+          <button class="btn btn-default btn-lg active navButt" role="button" ng-click="startDraft()">Start Draft</button>
+          <button class="btn btn-default btn-lg active navButt" role="button" ng-click="yo()">boom</button>
+      </div>
+
+      <div class="col-md-2">
+          <a href="#" class="btn btn-default btn-lg active navButt" role="button">Stop Draft</a>
+      </div>
+
       <div class="row">
-        <div class="col-md-12 draftTeams" ng-repeat="user in usersReadyToDraft">
-          <p>{{user.teamName}}</p>
+        <div class="col-md-12 draftTeams" ng-repeat="user in onlineUsers">
+          <p ng-if="user.online" ng-class="{yellow: user.is_turn}">{{user.teamName}}</p>
 
         </div>
       </div>
@@ -27,7 +36,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4 rightBorder divHeight">
-      <div  ng-repeat="dude in loadedPlayers" class="row draftBoxes draftPicks" ng-click="do(dude.$id)" ng-hide="dude.drafted">
+      <div  ng-repeat="dude in loadedPlayers" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
           <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
 		     <!-- <img src=""> -->
               {{dude.displayName}} - {{dude.position}} - {{dude.team}}

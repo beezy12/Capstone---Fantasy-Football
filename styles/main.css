@@ -1,3 +1,7 @@
+.yellow {
+  background-color: yellow;
+  border: 2px solid blue; }
+
 body {
   font: 16px Helvetica, sans-serif;
   color: #333; }

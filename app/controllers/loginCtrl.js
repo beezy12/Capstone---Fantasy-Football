@@ -20,8 +20,8 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 
 		$scope.registerUser = function() {
 			userRef.createUser({
-				email: $scope.loginEmail,
-				password: $scope.loginPassword
+				email: $scope.loginEmail || $scope.registerEmail,
+				password: $scope.loginPassword || $scope.registerPassword
 			}, function(error, userData) {
 				if (error) {
 					console.log("you messed up something", error);
