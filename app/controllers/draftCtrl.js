@@ -12,20 +12,6 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// disable the zplayerlist div
 
 
-
-		// $scope.users  = [
-		// 	{
-		// 		name: "Luke",
-		// 		id: "fdkjsfhadsufhkasdjfhkas",
-		// 		order: "first"
-		// 	},
-		// 	{
-		// 		name: "Joe",
-		// 		id: "jdsfjaian,wdsg",
-		// 		order: "last"
-		// 	}
-		// ];
-
 		generalVariables.checkUserLogin('draft');
 		
 		// get the logged in userId and set it to var currentUid
@@ -113,9 +99,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			//get ref to player's 'drafted' key, set 'drafted' to true
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
+		};
 
 			
-		};
 
 
 		
@@ -202,26 +188,32 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 					}
 				}
 
+				var usersOnlineNow = new Firebase("https://capstonefootball.firebaseio.com/onlineUsers/");
+				$firebaseArray(usersOnlineNow)
+					.$loaded()
+					.then(function(heyGuys) {
+						
+					})
 
-				onlineArray.$watch(function(snapshot) { 
-					console.log("sneeepshot", snapshot);
+				// onlineArray.$watch(function(snapshot) { 
+				// 	console.log("sneeepshot", snapshot);
 
-					if(snapshot.event === "child_added" ){
-						//console.log('yooooo');
-						//if child changed
-							//take the uid of child changed
-							//go into firebase users object/ then into child object with the uid of child changed
-							//get that object
-							// if online = true
-								//push object into $scope.usersReadyToDraft array
-							//else
-								//(this else will fire if online is = false)
-								//log this user aint online
+				// 	if(snapshot.event === "child_added" ){
+				// 		//console.log('yooooo');
+				// 		//if child changed
+				// 			//take the uid of child changed
+				// 			//go into firebase users object/ then into child object with the uid of child changed
+				// 			//get that object
+				// 			// if online = true
+				// 				//push object into $scope.usersReadyToDraft array
+				// 			//else
+				// 				//(this else will fire if online is = false)
+				// 				//log this user aint online
 
 
 
-					}
-				});
+				// 	}
+				// });
 
 				//console.log("users online", $scope.usersReadyToDraft);
 
@@ -265,15 +257,16 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			});
 			// output all players assc with that user
+		};
 				
 
-		};
 			
 
 		var i = 0;
 		var prevPlayer = $scope.usersReadyToDraft[i - 1];
 		var currentPlayer = $scope.usersReadyToDraft[i];
 		console.log(currentPlayer)
+		
 		$scope.startDraft = function() {
 			if (currentPlayer) {
 				currentPlayer['is_turn'] = true;

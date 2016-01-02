@@ -2,11 +2,13 @@
  	<div class="row">
    		<div class="col-md-4">
    			<h1>Draft Room</h1>
+        <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
    		</div>
 
+
  		  <div class="col-md-2 col-md-offset-4">
-   			Timer here<br/>
-   			on the clock
+   			<!-- Timer here<br/>
+   			on the clock -->
       </div>
       <div class="col-md-2">
           <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
@@ -35,8 +37,9 @@
 
 <div class="container-fluid">
 	<div class="row">
+
 		<div class="col-md-4 rightBorder divHeight">
-      <div  ng-repeat="dude in loadedPlayers" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
+      <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
           <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
 		     <!-- <img src=""> -->
               {{dude.displayName}} - {{dude.position}} - {{dude.team}}
@@ -73,9 +76,10 @@
       
 		</div>
 
-		<!-- div>
-			chat room here
-		</div> -->
+		<!-- <div id="message">
+        <input id="field-input" type="text" placeholder="Smack it">
+        <input id="submit-input" type="submit" value="SUBMIT">
+    </div> -->
 
 
 
