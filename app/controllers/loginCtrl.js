@@ -6,6 +6,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 		$scope.loginPassword = "";
 		$scope.firstName = "";
 		$scope.teamName = "";
+		
 		var currentUid;
 
 		
@@ -38,7 +39,8 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 					userRef.child("/"+userData.uid).set({
 						"firstName": $scope.firstName,
 						"teamName": $scope.teamName,
-						"online": true
+						"online": true,
+						"isTurn": false
 					});
 
 					
@@ -82,6 +84,7 @@ app.controller("loginCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locati
 			
 
 						userRef.child("/"+authData.uid).child("online").set(true);
+						userRef.child("/"+authData.uid).child("isTurn").set(false);
 						// 	"playersHere": $scope.teamName
 						// });
 

@@ -3,6 +3,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		// generalVariables.setHeight();
 
+		var prevPlayer;
+		var currentPlayer;
+		var i = 0;
+
 		window._ = _;
 
 		$rootScope.started = false;
@@ -61,6 +65,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
 		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/user");
+
+		var UserIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
 
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -174,6 +180,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			.$loaded()
 			.then(function(online) {
 				$scope.onlineUsers = online;
+				console.log($scope.onlineUsers);
 				// *********** had this as $scope.onlineUsers = onlineArray.....but that didn't seem 
 				// right. So I changed it to just say online....so now Im using the promise.
 
@@ -184,38 +191,48 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						
 						$scope.usersReadyToDraft.push($scope.onlineUsers[i]);
 						console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
+
+						// prevPlayer = $scope.usersReadyToDraft[i - 1];
+						// console.log("====", prevPlayer);
+
+						// currentPlayer = $scope.onlineUsers;
+						// console.log("currentPlayer=======", currentPlayer);
 						// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
 					}
 				}
+				
+				i = 0;
+				
+				// prevPlayer = $scope.usersReadyToDraft[i - 1];
+				// console.log("prev player ====", prevPlayer);
 
-				var usersOnlineNow = new Firebase("https://capstonefootball.firebaseio.com/onlineUsers/");
-				$firebaseArray(usersOnlineNow)
-					.$loaded()
-					.then(function(heyGuys) {
-						
-					})
+				currentPlayer = $scope.usersReadyToDraft[i];
+				console.log("currentPlayer=======", currentPlayer);
 
-				// onlineArray.$watch(function(snapshot) { 
-				// 	console.log("sneeepshot", snapshot);
+				
+				// $firebaseArray(usersOnlineNow)
+				// 	.$loaded()
+				// 	.then(function(heyGuys) {
+				// 		console.log("heyGuys", heyGuys);
+				// 		usersOnlineNow.set({
+				// 			online: heyGuys.$id
+				// 		});
 
-				// 	if(snapshot.event === "child_added" ){
-				// 		//console.log('yooooo');
-				// 		//if child changed
-				// 			//take the uid of child changed
-				// 			//go into firebase users object/ then into child object with the uid of child changed
-				// 			//get that object
-				// 			// if online = true
-				// 				//push object into $scope.usersReadyToDraft array
-				// 			//else
-				// 				//(this else will fire if online is = false)
-				// 				//log this user aint online
+				// 	});
 
+				// usersOnlineNow = $firebaseArray(usersOnlineNow);
 
+				
 
-				// 	}
-				// });
+				
 
-				//console.log("users online", $scope.usersReadyToDraft);
+			//})
+			// .then(function() {
+			// 	var usersOnlineNow = new Firebase("https://capstonefootball.firebaseio.com/");
+			// 	usersOnlineNow = $firebaseArray(usersOnlineNow);
+			// 	console.log("usersOnlineNow", usersOnlineNow);
+			// 	console.log("ready to draft", $scope.usersReadyToDraft);
+				
 
 			});  // end of the .$loaded .then
 
@@ -262,33 +279,51 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			
 
-		var i = 0;
-		var prevPlayer = $scope.usersReadyToDraft[i - 1];
-		var currentPlayer = $scope.usersReadyToDraft[i];
-		console.log(currentPlayer)
+		// var i = 0;
+		// var prevPlayer = $scope.usersReadyToDraft[i - 1];
+		// var currentPlayer = $scope.usersReadyToDraft[i];
+		// console.log(currentPlayer)
 		
 		$scope.startDraft = function() {
 			if (currentPlayer) {
-				currentPlayer['is_turn'] = true;
+				currentPlayer['isTurn'] = true;
 			
 			console.log("draft has started, it's this player's turn: ", currentPlayer);
 			return currentPlayer
 			}
 		};
 
-		function incrementPlayerIndex() {
-			++i
-			if (currentPlayer) {
-				console.log($scope.usersReadyToDraft[i])
-				prevPlayer['is_turn'] = false
-				currentPlayer['is_turn'] = true
-			}
- 			return i
-		}
+		// function incrementPlayerIndex() {
+		// 	++i;
+		// 	console.log("",i);
+		// 	if (currentPlayer) {
+		// 		console.log($scope.usersReadyToDraft[i]);
+		// 		prevPlayer['isTurn'] = false;
+		// 		currentPlayer['isTurn'] = true;
+		// 	}
+ 		// 	return i
+		// }
 
-		$scope.yo = function() {
-			var good = incrementPlayerIndex()
-			console.log(good)
+		$scope.moveToNextPlayer = function() {
+			// var good = incrementPlayerIndex()
+			// console.log(good)
+
+
+			
+			// $firebaseArray(UserIdRef)
+			// 	.$loaded()
+			// 	.then(function)
+
+					prevPlayer = $scope.usersReadyToDraft[i];
+					console.log("prev player ====", prevPlayer);
+					++i;
+					console.log("",i);
+					if (currentPlayer) {
+						console.log($scope.usersReadyToDraft[i]);
+						prevPlayer['isTurn'] = false;
+						currentPlayer['isTurn'] = true;
+					}
+		 			return i;
 		};
 				
 }]);
