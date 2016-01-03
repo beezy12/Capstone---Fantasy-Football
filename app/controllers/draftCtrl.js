@@ -1,7 +1,7 @@
 app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope", "$firebaseObject",
 	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope, $firebaseObject) { 
 
-		// generalVariables.setHeight();
+		
 
 		var prevPlayer;
 		var currentPlayer;
@@ -53,7 +53,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// });
 
 
-// // ***************************************************************************************************
+// ***************************************************************************************************
 
 		
 
@@ -68,15 +68,20 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		
 
-		// $scope.userTeamName = [];
-		var userIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
+		$scope.userTeamName = [];
+		// var userIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
+		// console.log(userIdRef);
+		// $firebaseArray(userIdRef)
+		// 	.$loaded()
+		// 	.then(function(thisUser) {
+		// 		//console.log(thisUser.teamName);	
+		// 		// $scope.userTeamName = thisUser;
+		// 		// console.log($scope.userTeamName)
 
-		$firebaseArray(userIdRef)
-			.$loaded()
-			.then(function(thisUser) {
-				$scope.userTeamName = thisUser;
-				console.log("");	
-			})
+		// 		for (var i = 0; i < thisUser.length; i++) {
+		// 			console.log(thisUser[i]);
+		// 		}
+		// 	})
 
 
 
@@ -89,6 +94,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		$scope.teamPlayersArray = [];
 
+		
 		// takes the Firebase ref for the zPlayersList and turns it from an object into an array, which is
 		// then processed through a promise and returned to the empty array above
 		var playerArray = $firebaseArray(playerRef);
@@ -126,7 +132,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			
 
 
-		
+ /********************************* Functionality for drafting players and adding them to each team **********************/		
 
 		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
@@ -184,8 +190,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				});
 
 		
-		
-		// here is where I keep track of what teams are online
+	
+ /***************************** what teams are online / get team name to output to dom ********************************/
 		
 		$scope.usersReadyToDraft = [];
 		//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
@@ -215,6 +221,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						// console.log("currentPlayer=======", currentPlayer);
 						// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
 					}
+
+					if ($scope.onlineUsers[i].$id === currentUid) {
+						console.log($scope.onlineUsers[i].teamName);
+						$scope.userTeamName.push($scope.onlineUsers[i].teamName);
+					}
+
 				}
 								
 				// prevPlayer = $scope.usersReadyToDraft[i - 1];
@@ -250,7 +262,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			});  // end of the .$loaded .then
 
-		
+
+
+ /************************************ Outputting Other Teams Players From Dropdown **************************************/		
 
 		$scope.outputOtherTeam = function(teamName){
 			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
@@ -291,7 +305,8 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		};
 				
 
-			
+
+ /***************************** Move Draft Highlighted Team **************************************************/			
 
 		// var i = 0;
 		// var prevPlayer = $scope.usersReadyToDraft[i - 1];
@@ -302,7 +317,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			if (currentPlayer) {
 				console.log(i)
 				var ref = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentPlayer.$id)
-				
+				console.log(ref);
 				var obj = new $firebaseObject(ref)
 				console.log(obj)
 				console.log(currentPlayer)
@@ -354,19 +369,5 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 
 
-
+/**************************************************************************************************************/
 			
-
-
-
-
-			
-								
-		
-
-
-							
-							
-											
-											
-

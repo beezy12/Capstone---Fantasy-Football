@@ -1,7 +1,8 @@
 <div class="container-fluid borderBottom draftHeader">
  	<div class="row">
-   		<div class="col-md-4">
+   		<div class="col-md-4" ng-repeat="name in userTeamName">
    			<h1>Draft Room</h1>
+        <h1>{{name}}</h1>
         <!-- <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player"> -->
    		</div>
 
@@ -16,9 +17,9 @@
           <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
       </div>
 
-      <div class="col-md-2">
+      <!-- <div class="col-md-2">
           <a href="#" class="btn btn-default btn-lg active navButt" ng-show="clicked" role="button">Stop Draft</a>
-      </div>
+      </div> -->
 
       <div class="col-md-2 col-md-offset-2">
           <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
