@@ -12,7 +12,7 @@
       </div> -->
 
       <div class="col-md-2">
-          <button class="btn btn-default btn-lg active navButt" role="button" ng-model="clicked" ng-click="startDraft()">Start Draft</button>
+          <button class="btn btn-default btn-lg active navButt" role="button" ng-hide="clicked" ng-click="startDraft()">Start Draft</button>
           <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
       </div>
 
@@ -24,7 +24,7 @@
           <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
       </div>
       <!-- <div class="row">
-        <div class="col-md-12 draftTeams" ng-repeat="user in onlineUsers">
+        <div class="col-md-12  " ng-repeat="user in onlineUsers">
           <p ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
 
         </div>
@@ -35,8 +35,8 @@
 
 <div class="container-fluid heightControl">
       <div class="row">
-        <div class="col-md-12" ng-repeat="user in onlineUsers">
-          <p ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
+        <div class="col-md-12 teamsOnline" ng-repeat="user in onlineUsers">
+          <p class="teamsStyle" ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
 
         </div>
       </div>
@@ -44,22 +44,24 @@
 
 <div class="container-fluid">
 	<div class="row">
-
-		<div class="col-md-4 rightBorder divHeight">
-      <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
-      <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
-          <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
-		     <!-- <img src=""> -->
-              {{dude.displayName}} - {{dude.position}} - {{dude.team}}
+		<div class="col-md-4">
+        <h4>Player List</h4>
+        <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
+          <div class="rightBorder divHeight">
+            <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
+              <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
+    		     <!-- <img src=""> -->
+                  {{dude.displayName}} - {{dude.position}} - {{dude.team}}
+              </div>
+            </div>
           </div>
-      </div>
 		</div>
                     
                 
                 
 
 		<div class="col-md-5 rightBorder draft">
-			my team roster here
+			<h4>my team roster here</h4>
 			<div class="draftMyTeam">
           <div ng-repeat="player in myPlayers" class="animated bounce">
             <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
@@ -115,3 +117,4 @@
     </div>
 	</div>
 </div>
+      

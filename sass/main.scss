@@ -17,7 +17,7 @@
 
 
 body {
-  font: 16px Helvetica, sans-serif;
+  font-family: 'Orbitron', 'Cinzel', sans-serif;
   color: #333; }
 
 /*# sourceMappingURL=main.css.map */
@@ -188,6 +188,16 @@ body {
 .bounceInLeft {
   -webkit-animation-name: bounceInLeft;
   animation-name: bounceInLeft;
+}
+
+.teamsOnline {
+  border-bottom: 2px solid red;
+  display: inline;
+  
+}
+
+.teamsStyle {
+  font-size: 1.2em;
 }
 
 

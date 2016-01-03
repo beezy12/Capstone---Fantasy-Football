@@ -1,5 +1,5 @@
-app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope",
-	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope) {
+app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope", "$firebaseObject",
+	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope, $firebaseObject) { 
 
 		// generalVariables.setHeight();
 
@@ -66,7 +66,23 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 
-		var UserIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
+		
+
+		// $scope.userTeamName = [];
+		var userIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
+
+		$firebaseArray(userIdRef)
+			.$loaded()
+			.then(function(thisUser) {
+				$scope.userTeamName = thisUser;
+				console.log("");	
+			})
+
+
+
+
+
+
 
 		// empty array that will hold players AngularFire array that comes back when promise is complete
 		$scope.loadedPlayers = [];
@@ -200,12 +216,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						// console.log("online users team name ------>>>>", $scope.onlineUsers[i].teamName);
 					}
 				}
-				
-				i = 0;
-				
+								
 				// prevPlayer = $scope.usersReadyToDraft[i - 1];
 				// console.log("prev player ====", prevPlayer);
-
+				i = 0;
 				currentPlayer = $scope.usersReadyToDraft[i];
 				console.log("currentPlayer=======", currentPlayer);
 
@@ -286,44 +300,54 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		
 		$scope.startDraft = function() {
 			if (currentPlayer) {
-				currentPlayer['isTurn'] = true;
-			
-			console.log("draft has started, it's this player's turn: ", currentPlayer);
-			return currentPlayer
+				console.log(i)
+				var ref = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentPlayer.$id)
+				
+				var obj = new $firebaseObject(ref)
+				console.log(obj)
+				console.log(currentPlayer)
+				obj.$loaded().then(function(data) {
+					data.isTurn = true;
+					data.$save()
+					console.log(data)
+				})
+			    
+				
+			    console.log("draft has started, it's this player's turn: ", currentPlayer);
+			return currentPlayer;
 			}
 		};
 
-		// function incrementPlayerIndex() {
-		// 	++i;
-		// 	console.log("",i);
-		// 	if (currentPlayer) {
-		// 		console.log($scope.usersReadyToDraft[i]);
-		// 		prevPlayer['isTurn'] = false;
-		// 		currentPlayer['isTurn'] = true;
-		// 	}
- 		// 	return i
-		// }
+
 
 		$scope.moveToNextPlayer = function() {
-			// var good = incrementPlayerIndex()
-			// console.log(good)
+			prevPlayer = $scope.usersReadyToDraft[i];
+			nextPlayer = $scope.usersReadyToDraft[i + 1]
 
+			if (currentPlayer) {
+			var fRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + prevPlayer.$id)
+			console.log(currentPlayer.$id)
+			var fObj = new $firebaseObject(fRef)
+				fObj.$loaded().then(function(data) {
+					console.log(fObj)
+					data.isTurn = false;
+					data.$save()
+					i++;
+					console.log("--->",i);
+				}).then(function() {
+					console.log("--->",i);
+					var sRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + nextPlayer.$id)
+					console.log(currentPlayer.$id)
+					var sObj = new $firebaseObject(sRef)
+					sObj.$loaded().then(function(info) {
+						console.log(sObj)
+						sObj['isTurn'] = true;
+						sObj.$save()
+						console.log(sObj)
+					})
+				})
 
-			
-			// $firebaseArray(UserIdRef)
-			// 	.$loaded()
-			// 	.then(function)
-
-					prevPlayer = $scope.usersReadyToDraft[i];
-					console.log("prev player ====", prevPlayer);
-					++i;
-					console.log("",i);
-					if (currentPlayer) {
-						console.log($scope.usersReadyToDraft[i]);
-						prevPlayer['isTurn'] = false;
-						currentPlayer['isTurn'] = true;
-					}
-		 			return i;
+ 			}
 		};
 				
 }]);

@@ -78,37 +78,6 @@ body {
   width: 100%;
   padding: 5px; }
 
-.heightControl {
-  height: 30px;
-  border-bottom: 2px solid red;
-}
-
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.infinite {
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-}
-
-.animated.hinge {
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-}
-
-.animated.flipOutX,
-.animated.flipOutY,
-.animated.bounceIn,
-.animated.bounceOut {
-  -webkit-animation-duration: .75s;
-  animation-duration: .75s;
-}
-
 @-webkit-keyframes bounceInLeft {
   from, 60%, 75%, 90%, to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -154,5 +123,12 @@ body {
 .bounceInLeft {
   -webkit-animation-name: bounceInLeft;
   animation-name: bounceInLeft; }
+
+.teamsOnline {
+  border-bottom: 2px solid red;
+  display: inline; }
+
+.teamsStyle {
+  font-size: 1.2em; }
 
 /*# sourceMappingURL=main.css.map */
