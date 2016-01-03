@@ -1,5 +1,5 @@
-app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope", "$firebaseObject",
-	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope, $firebaseObject) { 
+app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope", 
+	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope) { 
 
 		
 
@@ -315,21 +315,21 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		
 		$scope.startDraft = function() {
 			if (currentPlayer) {
-				console.log(i)
-				var ref = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentPlayer.$id)
-				console.log(ref);
-				var obj = new $firebaseObject(ref)
-				console.log(obj)
-				console.log(currentPlayer)
+				console.log(i);
+				var ref = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentPlayer.$id);
+				//console.log(ref);
+				var obj = new $firebaseObject(ref);
+				console.log(obj);
+				console.log(currentPlayer);
 				obj.$loaded().then(function(data) {
 					data.isTurn = true;
-					data.$save()
-					console.log(data)
-				})
+					data.$save();
+					console.log(data);
+				});
 			    
-				
 			    console.log("draft has started, it's this player's turn: ", currentPlayer);
-			return currentPlayer;
+				
+				return currentPlayer;
 			}
 		};
 
@@ -337,33 +337,49 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		$scope.moveToNextPlayer = function() {
 			prevPlayer = $scope.usersReadyToDraft[i];
-			nextPlayer = $scope.usersReadyToDraft[i + 1]
+			nextPlayer = $scope.usersReadyToDraft[i + 1];
 
 			if (currentPlayer) {
-			var fRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + prevPlayer.$id)
-			console.log(currentPlayer.$id)
-			var fObj = new $firebaseObject(fRef)
+			var fRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + prevPlayer.$id);
+			console.log(currentPlayer.$id);
+			var fObj = new $firebaseObject(fRef);
 				fObj.$loaded().then(function(data) {
-					console.log(fObj)
+					console.log(fObj);
 					data.isTurn = false;
-					data.$save()
+					data.$save();
 					i++;
 					console.log("--->",i);
 				}).then(function() {
 					console.log("--->",i);
-					var sRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + nextPlayer.$id)
-					console.log(currentPlayer.$id)
-					var sObj = new $firebaseObject(sRef)
+					var sRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + nextPlayer.$id);
+					console.log(currentPlayer.$id);
+					var sObj = new $firebaseObject(sRef);
 					sObj.$loaded().then(function(info) {
-						console.log(sObj)
-						sObj['isTurn'] = true;
-						sObj.$save()
-						console.log(sObj)
-					})
-				})
+						console.log(sObj);
+						sObj.isTurn = true;
+						sObj.$save();
+						console.log(sObj);
+
+						// if(sObj[i] === usersReadyToDraft.length)
+					});
+				});
 
  			}
 		};
+
+
+		// $scope.stopDraft = function() {
+		// 	var stopArray = $firebaseArray(onlineRef);
+
+		// 	stopArray
+		// 		.$loaded()
+		// 		.then(function(stop) {
+		// 			for (var i = 0; i < stop.length; i++) {
+
+		// 				stop[i].child("/"+currentUid).update({"isTurn": false})
+		// 			}
+		// 		})
+		// }
 				
 }]);
 

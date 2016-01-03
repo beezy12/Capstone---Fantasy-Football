@@ -1,121 +1,123 @@
-<div class="container-fluid borderBottom draftHeader">
- 	<div class="row">
-   		<div class="col-md-4" ng-repeat="name in userTeamName">
-   			<h1>Draft Room</h1>
-        <h1>{{name}}</h1>
-        <!-- <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player"> -->
-   		</div>
+<div class="wholePage">
 
-
- 		  <!-- <div class="col-md-2 col-md-offset-4">
-   			Timer here<br/>
-   			on the clock
-      </div> -->
-
-      <div class="col-md-2">
-          <button class="btn btn-default btn-lg active navButt" role="button" ng-hide="clicked" ng-click="startDraft()">Start Draft</button>
-          <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
-      </div>
-
-      <!-- <div class="col-md-2">
-          <a href="#" class="btn btn-default btn-lg active navButt" ng-show="clicked" role="button">Stop Draft</a>
-      </div> -->
-
-      <div class="col-md-2 col-md-offset-2">
-          <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
-      </div>
-      <!-- <div class="row">
-        <div class="col-md-12  " ng-repeat="user in onlineUsers">
-          <p ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
-
-        </div>
-      </div> -->
-
-  </div>
-</div>
-
-<div class="container-fluid heightControl">
-      <div class="row">
-        <div class="col-md-12 teamsOnline" ng-repeat="user in onlineUsers">
-          <p class="teamsStyle" ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
-
-        </div>
-      </div>
-</div>
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-4">
-        <h4>Player List</h4>
-        <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
-          <div class="rightBorder divHeight">
-            <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
-              <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
-    		     <!-- <img src=""> -->
-                  {{dude.displayName}} - {{dude.position}} - {{dude.team}}
-              </div>
-            </div>
+    <div class="container-fluid borderBottom draftHeader">
+     	<div class="row">
+       		<div class="col-md-2">
+            <img src="images/FFF_logo.png" class="logo">
+       			<h3 class="draftTitle">Draft Room</h3>
           </div>
-		</div>
-                    
-                
-                
 
-		<div class="col-md-5 rightBorder draft">
-			<h4>my team roster here</h4>
-			<div class="draftMyTeam">
-          <div ng-repeat="player in myPlayers" class="animated bounce">
-            <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
+
+     		  <div class="col-md-2 col-md-offset-2" ng-repeat="name in userTeamName">
+       			<h2>Team:</h2>
+            <h1 class="draftTeamName">{{name}}</h1>
+          </div> 
+
+
+          <div class="draftButtons">
+                <div class="col-md-2 col-md-offset-2">
+                    <button class="btn btn-default btn-lg active navButt" role="button" ng-hide="clicked" ng-click="startDraft()">Start Draft</button>
+                    <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
+                </div>
+
+                <!-- <div class="col-md-2">
+                    <button class="btn btn-default btn-lg active navButt" ng-click="stopDraft()" role="button">Stop Draft</button>
+                </div> -->
+
+                <div class="col-md-2">
+                    <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
+                </div>
           </div>
-				
-			</div>
-		</div>
-
-
-    <!-- ng-options="user.name for user in users     (LUKE HAD THIS IN THE SELECT, BUT I TOOK IT OUT)-->
-
-		<div class="col-md-3 draft">
-			<select id="teamSelect" class="form-control" ng-model="teamSelected" ng-change="outputOtherTeam(teamSelected)">
-        <option></option>
-        <option ng-repeat="team in usersReadyToDraft">{{team.teamName}}</option>
-			</select>
-
-     <!--  <p ng-repeat="team in usersReadyToDraft">{{team.teamName}} <button class="btn" ng-click="giveButt(team)"></button>
-      </p>
- -->
-			<div ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
-      
-		</div>
-
-		<!-- <div id="message">
-        <input id="field-input" type="text" placeholder="Smack it">
-        <input id="submit-input" type="submit" value="SUBMIT">
-    </div> -->
-
-
-
-
-        <!--  confirm cancel Modal -->
-    <div id="confirmDraft" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Do you wish to draft {{modalPlayer.displayName}}?</h4>
-          </div>
-          <div class="modal-body">
-              <button ng-click="draftPlayer(); moveToNextPlayer()" data-dismiss="modal" class="btn">DRAFT</button>
-              <!-- <button class="btn" data-dismiss="modal">No</button> -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" ng-click="cancelPlayer()" class="btn btn-default" data-dismiss="modal">cancel</button>
-          </div>
-        </div>
+          
 
       </div>
     </div>
-	</div>
-</div>
+
+    <div class="container-fluid heightControl">
+          <div class="row">
+            <div class="col-md-12" ng-repeat="user in onlineUsers">
+              <div class="col-md-2 teamsOnline">
+                <p class="teamsStyle" ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="container-fluid bottomHalf">
+    	<div class="row">
+    		<div class="col-md-4 rightBorder playersBox">
+            <h4>Player List</h4>
+            <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
+              <div class="rightBorder divHeight">
+                <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
+                  <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
+        		     <!-- <img src=""> -->
+                      {{dude.displayName}} - {{dude.position}} - {{dude.team}}
+                  </div>
+                </div>
+              </div>
+    		</div>
+                        
+                    
+                    
+
+    		<div class="col-md-5 rightBorder draft">
+    			<h4 class="myRoster">My Team</h4>
+    			<div class="draftMyTeam">
+              <div ng-repeat="player in myPlayers" class="animated bounce">
+                <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
+              </div>
+    				
+    			</div>
+    		</div>
+
+
+        <!-- ng-options="user.name for user in users     (LUKE HAD THIS IN THE SELECT, BUT I TOOK IT OUT)-->
+
+    		<div class="col-md-3 draft">
+        <h4>See other teams rosters</h4>
+    			<select id="teamSelect" class="form-control" ng-model="teamSelected" ng-change="outputOtherTeam(teamSelected)">
+            <option></option>
+            <option ng-repeat="team in usersReadyToDraft">{{team.teamName}}</option>
+    			</select>
+
+         <!--  <p ng-repeat="team in usersReadyToDraft">{{team.teamName}} <button class="btn" ng-click="giveButt(team)"></button>
+          </p>
+     -->
+    			<div ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
+          
+    		</div>
+
+    		<!-- <div id="message">
+            <input id="field-input" type="text" placeholder="Smack it">
+            <input id="submit-input" type="submit" value="SUBMIT">
+        </div> -->
+
+
+
+
+            <!--  confirm cancel Modal -->
+        <div id="confirmDraft" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Do you wish to draft {{modalPlayer.displayName}}?</h4>
+              </div>
+              <div class="modal-body">
+                  <button ng-click="draftPlayer(); moveToNextPlayer()" data-dismiss="modal" class="btn">DRAFT</button>
+                  <!-- <button class="btn" data-dismiss="modal">No</button> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" ng-click="cancelPlayer()" class="btn btn-default" data-dismiss="modal">cancel</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    	</div>
+    </div>
       
+</div>

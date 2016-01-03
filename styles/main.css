@@ -1,3 +1,6 @@
+.wholePage {
+  border: 2px solid red; }
+
 .yellow {
   background-color: yellow;
   border: 2px solid blue; }
@@ -36,29 +39,40 @@ body {
 .messageMain {
   margin-left: 180px; }
 
+.playersBox {
+  padding: 0 20px 0 20px; }
+
 .rightBorder {
   border-right: 2px solid red; }
 
 .draftHeader {
-  height: 120px; }
+  height: 160px; }
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 10px 0 0 10px; }
+
+.draftButtons {
+  margin: 30px 0 0 0; }
+
+.bottomHalf {
+  border-top: 2px solid red; }
+
+.search {
+  margin: 0 0 10px 0;
+  border: 2px solid black; }
 
 .draftMyTeam {
   width: 400px;
   height: 500px;
-  border: 1px solid red;
+  border: 2px solid red;
   margin: 40px 0 0 50px;
   overflow: scroll; }
 
-.teamHead {
-  height: 120px; }
-
-.teamDiv {
-  display: table;
-  margin: 0 auto; }
-
 .draftBoxes {
   height: 80px;
-  border-bottom: 1px solid red;
+  border: 1px solid red;
   padding: 30px 0 0 20px; }
 
 .divHeight {
@@ -70,13 +84,15 @@ body {
 .draftPicks:hover {
   background-color: #A29F9F; }
 
-.draftTeams li {
-  display: inline;
-  list-style: none;
-  border: 1px solid blue;
-  bottom: 0px;
-  width: 100%;
-  padding: 5px; }
+.myRoster {
+  margin: 25px 0 0 170px; }
+
+.draftTeamName {
+  font-size: 3.8em;
+  color: blue; }
+
+.teamsStyle {
+  font-size: 1.2em; }
 
 @-webkit-keyframes bounceInLeft {
   from, 60%, 75%, 90%, to {
@@ -123,12 +139,5 @@ body {
 .bounceInLeft {
   -webkit-animation-name: bounceInLeft;
   animation-name: bounceInLeft; }
-
-.teamsOnline {
-  border-bottom: 2px solid red;
-  display: inline; }
-
-.teamsStyle {
-  font-size: 1.2em; }
 
 /*# sourceMappingURL=main.css.map */
