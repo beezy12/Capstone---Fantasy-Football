@@ -23,7 +23,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// console.log("currentUid that gets logged when draft page loads ----->", currentUid);
 
 
-// 		// *********************** USE THIS TO POPULATE DRAFT PLAYERS LIST ****************************************************************
+ 		// *********************** USE THIS TO POPULATE DRAFT PLAYERS LIST ****************************************************************
 
 
 		
@@ -135,7 +135,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			//change turn 
 			ref.child("teamCount").transaction(function(fbTeamCount) {
 			   // If /users/fred/rank has never been set, currentRank will be null.
-			  return fbTeamCount+1;
+			  return fbTeamCount + 1;
 			});
 
 
@@ -259,16 +259,17 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 					  console.log("$scope.currentTeamCount ", $scope.currentTeamCount);
 
-					  if ($scope.currentTeamCount > $scope.usersReadyToDraft.length){
+					  if ($scope.currentTeamCount > $scope.usersReadyToDraft.length - 1){
 					  	ref.child("teamCount").transaction(function(fbTeamCount) {
 						   // If /users/fred/rank has never been set, currentRank will be null.
-						  return fbTeamCount = 0;
+						  return fbTeamCount === 0;
 						});
 					  } 
 
 					  });
 
 	
+			});  // end of the .$loaded .then
 
 				
 				// $firebaseArray(usersOnlineNow)
@@ -295,7 +296,6 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			// 	console.log("ready to draft", $scope.usersReadyToDraft);
 				
 
-			});  // end of the .$loaded .then
 
 
 

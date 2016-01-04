@@ -16,7 +16,7 @@
 
           <div class="draftButtons">
                 <div class="col-md-2 col-md-offset-2">
-                    <button class="btn btn-default btn-lg active navButt" role="button" ng-hide="clicked" ng-click="startDraft()">Start Draft</button>
+                    <button class="btn btn-default btn-lg active navButt" role="button" ng-click="startDraft()">Start Draft</button>
                     <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
                 </div>
 
@@ -35,7 +35,7 @@
 
     <div class="container-fluid heightControl">
           <div class="row">
-            <div class="col-md-3" ng-repeat="user in onlineUsers">
+            <div class="col-md-2 onlineGuys" ng-repeat="user in onlineUsers">
 
                 <p class="teamsStyle" ng-if="user.online" ng-class="{yellow: user.isTurn}">{{user.teamName}}</p>
 
@@ -46,7 +46,7 @@
     <div class="container-fluid bottomHalf">
     	<div class="row">
     		<div class="col-md-4 rightBorder playersBox">
-            <h4>Player List</h4>
+            <h3>Player List</h3>
             <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
               <div class="rightBorder divHeight">
                 <div  ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
@@ -62,7 +62,7 @@
                     
 
     		<div class="col-md-5 rightBorder draft">
-    			<h4 class="myRoster">My Team</h4>
+    			<h3 class="myRoster">My Team</h3>
     			<div class="draftMyTeam">
               <div ng-repeat="player in myPlayers" class="animated bounce">
                 <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
@@ -75,7 +75,7 @@
         <!-- ng-options="user.name for user in users     (LUKE HAD THIS IN THE SELECT, BUT I TOOK IT OUT)-->
 
     		<div class="col-md-3 draft">
-        <h4>See other teams rosters</h4>
+        <h3>See other teams rosters</h3>
     			<select id="teamSelect" class="form-control" ng-model="teamSelected" ng-change="outputOtherTeam(teamSelected)">
             <option></option>
             <option ng-repeat="team in usersReadyToDraft">{{team.teamName}}</option>

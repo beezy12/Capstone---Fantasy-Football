@@ -1,5 +1,9 @@
 .wholePage {
-  border: 2px solid red; }
+  border: 3px solid red; }
+
+.splashWholePage {
+  border: 3px solid red;
+  height: 755px; }
 
 .yellow {
   background-color: yellow;
@@ -7,12 +11,17 @@
 
 body {
   font-family: 'Orbitron', 'Cinzel', sans-serif;
-  color: #333; }
+  color: #333;
+  font-size: 1.6em; }
 
 /*# sourceMappingURL=main.css.map */
 #signIn {
-  margin-top: 200px;
-  border: 1px solid red; }
+  margin-top: 50px;
+  border: 1px solid red;
+  padding: 20px; }
+
+#signIn input {
+  border: 2px solid black; }
 
 .borderBottom {
   border-bottom: 2px solid red; }
@@ -48,10 +57,23 @@ body {
 .draftHeader {
   height: 160px; }
 
+.teamHead {
+  height: 120px; }
+
 .logo {
   width: 100px;
   height: 100px;
-  margin: 10px 0 0 10px; }
+  margin: 10px 0 0 25px; }
+
+.homeLogo {
+  width: 100px;
+  height: 100px;
+  margin: 10px 0 0 65px; }
+
+.splashLogo {
+  width: 230px;
+  height: 230px;
+  margin: 10px 0 0 520px; }
 
 .draftButtons {
   margin: 30px 0 0 0; }
@@ -68,6 +90,13 @@ body {
   height: 500px;
   border: 2px solid red;
   margin: 40px 0 0 50px;
+  overflow: scroll; }
+
+.myTeam {
+  width: 400px;
+  height: 500px;
+  border: 2px solid red;
+  margin: 40px 0 0 420px;
   overflow: scroll; }
 
 .draftBoxes {
@@ -91,8 +120,38 @@ body {
   font-size: 3.8em;
   color: blue; }
 
+#teamSelect {
+  border: 2px solid black; }
+
+.onlineGuys {
+  margin: 20px 0;
+  border: 1px solid blue;
+  text-align: center;
+  padding-top: 15px; }
+
+.announce {
+  margin-top: 55px; }
+
 .teamsStyle {
   font-size: 1.2em; }
+
+.leagueTable a {
+  font-size: 1.2em; }
+
+.leagueTable {
+  margin: 10px 0 0 350px; }
+
+.push {
+  margin-left: 65px; }
+
+.getRight {
+  margin-left: 30px; }
+
+.mooove {
+  margin-left: 420px; }
+
+.leagueList {
+  margin: 20px 0 0 20px; }
 
 @-webkit-keyframes bounceInLeft {
   from, 60%, 75%, 90%, to {

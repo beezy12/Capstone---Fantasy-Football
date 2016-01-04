@@ -1,65 +1,64 @@
-<div class="container-fluid borderBottom">
- 	<div class="row">
-   		<div class="col-md-4">
-   			<img src="images/FFF_logo.png" class="logo">
-        <h2>League Home</h2>
+<div class="splashWholePage">
+
+    <div class="container-fluid borderBottom">
+     	<div class="row">
+       		<div class="col-md-4">
+       			<img src="images/FFF_logo.png" class="homeLogo">
+            <h2>League Home</h2>
+          </div>
+
+          <div class="col-md-4">
+            <h1 class="announce">Fantasy Football Forum</h1>
+          </div>
+
+
+          <div class="col-md-2 col-md-offset-2 homeButtons">
+            <a ng-click="logout()" href="#/splash" class="btn btn-default btn-lg active navButt" role="button">Logout</a>
+          </div>
       </div>
-
-      <div class="col-md-4">
-        <h1>Fantasy Football Forum</h1>
-      </div>
-
-
-      <div class="col-md-2 col-md-offset-2 draftButtons">
-        <a ng-click="logout()" href="#/splash" class="btn btn-default btn-lg active navButt" role="button">Logout</a>
-      </div>
-  </div>
-</div>
+    </div>
 
 
 
-<div class="container-fluid">
- 	<div class="row">
-   		<div class="col-md-10 col-md-offset-2 navbar">
-   			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
-  			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
-  			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
-  			<a href="#/draft" class="btn btn-default btn-lg active navButt" role="button">Draft Room</a>
-   		</div>
-   	</div>
-</div>
+    <div class="container-fluid">
+     	<div class="row">
+       		<div class="col-md-10 col-md-offset-2 navbar">
+       			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
+      			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
+      			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
+      			<a href="#/draft" class="btn btn-default btn-lg active navButt" role="button">Draft Room</a>
+       		</div>
+       	</div>
+    </div>
 
-<div></div>
+    <div></div>
 
 
 
-<div class="container-fluid">
- 	<div class="row">
-   		<div class="col-md-3 col-md-offset-2">
-   			<h3>League Standings</h3>
-            <table class="leagueTable">
-            	<!-- <tr class="leagueTable">
-                    <td class="leagueTable">Division 1</td>
-                    <td class="leagueTable">Division 2</td>
-                </tr> -->
-                <tr class="leagueTable" ng-repeat="team in userTeams">
-                    <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.teamName}}</a></td>
-                </tr>
+    <div class="container-fluid">
+     	<div class="row">
+       		<div class="col-md-3 col-md-offset-2">
+       			<h3>League Standings</h3>
+                <table class="leagueList">
+                	<!-- <tr class="leagueTable">
+                        <td class="leagueTable">Division 1</td>
+                        <td class="leagueTable">Division 2</td>
+                    </tr> -->
+                    <tr class="leagueTable" ng-repeat="team in userTeams">
+                        <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.teamName}}</a></td>
+                    </tr>
+                        
                     
-                
-            </table>
-   		</div>
+                </table>
+       		</div>
 
-   		<div class="col-md-3 messageMain">
-   			<h3>Smack Talkin' Area</h3>
-   			<textarea class="messageMainBox"></textarea>
-   			<input type="text" placeholder="Enter message here...">
-   			<button>Enter</button>
-   		</div>
-   	</div>
-</div>
-
-
+       		<div class="col-md-3 messageMain">
+       			<h3>Smack Talkin' Area</h3>
+       			<textarea class="messageMainBox"></textarea>
+       			<input type="text" placeholder="Enter message here...">
+       			<button>Enter</button>
+       		</div>
+       	</div>
+    </div>
               
-
-
+</div>

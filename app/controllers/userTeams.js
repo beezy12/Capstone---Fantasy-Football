@@ -7,6 +7,7 @@ app.controller("userTeamsCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$lo
 
 
 		$scope.collectedPlayer = [];
+		//console.log($scope.collectedPlayer);
 
 
 		var draftPlayers = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
@@ -23,6 +24,7 @@ app.controller("userTeamsCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$lo
 					for(var t = 0; t < userIds.length; t++) {
 						if (draftedPlayersId[i].$id === userIds[t].$id) {
 							$scope.collectedPlayer.push(draftedPlayersId[i]);
+							//$scope.collectedPlayer.push(userIds[t].$id);
 						}
 					}
 				}

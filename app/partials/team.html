@@ -1,75 +1,42 @@
-<div class="container-fluid borderBottom teamHead">
- 	<div class="row">
-   		<div class="col-md-5">
-   			<img src="">team logo
-   		</div>
+<div class="splashWholePage">
 
-   		<div class="col-md-5">
-   			<h1>Team Name</h1>
-   		</div>
+      <div class="container-fluid borderBottom teamHead">
+       	<div class="row">
+         		<div class="col-md-4">
+         			<img src="images/FFF_logo.png" class="homeLogo">
+         		</div>
 
-      <div class="col-md-2">
-        <a ng-click="logout()" href="#/splash" class="btn btn-default btn-lg active navButt" role="button">Logout</a>
+         		<div class="col-md-5 push">
+         			<h1>My Team</h1>
+         		</div>
+
+            <div class="col-md-2">
+              <a href="#/home" class="btn btn-default btn-lg active navButt getRight" role="button">League Home</a>
+            </div>
+         	</div>
       </div>
-   	</div>
+
+      <div class="container-fluid">
+       	<div class="row">
+         		<div class="col-md-10 col-md-offset-2 navbar">
+         			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
+        			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
+        			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
+        			<a href="#/draft" class="btn btn-default btn-lg active navButt" role="button">Draft Room</a>
+         		</div>
+         	</div>
+      </div>
+
+      <div class="container-fluid teamDiv">
+      	<div class="row">
+      		<div class="col-md-12">
+      			<div class="myTeam">
+              <div class="draftBoxes" ng-repeat="player in myPlayers">{{player.displayName}} - {{player.position}}- {{player.team}}</div>
+      			</div>
+      		</div>
+      	</div>
+      </div>
 </div>
 
-<div class="container-fluid">
- 	<div class="row">
-   		<div class="col-md-10 col-md-offset-2 navbar">
-   			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
-  			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
-  			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
-  			<a href="#/draft" class="btn btn-default btn-lg active navButt" role="button">Draft Room</a>
-   		</div>
-   	</div>
-</div>
 
-<div class="container-fluid teamDiv">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="draftMyTeam">
-        <div class="draftBoxes" ng-repeat="player in myPlayers">{{player.displayName}} - {{player.position}}- {{player.team}}</div>
-
-
-				<!-- <table class="leagueTable">
-            	<tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-                <tr class="leagueTable">
-                    <td class="leagueTable">Player</td>
-                    <td class="leagueTable">Position</td>
-                    <td class="leagueTable">Stats</td>
-                </tr>
-            </table> -->
-			</div>
-		</div>
-	</div>
-</div>
+              

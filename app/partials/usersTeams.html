@@ -1,3 +1,29 @@
-<div ng-repeat="player in collectedPlayer">
-	<h4>{{player.displayName}}</h4>
+<div class="wholePage">
+
+    <div class="container-fluid draftHeader borderBottom">
+       	<div class="row">
+     		<div class="col-md-4">
+     			<img src="images/FFF_logo.png" class="homeLogo">
+     		</div>
+
+     		<div class="col-md-6">
+     			<h1>Team</h1>
+     		</div>
+
+            <div class="col-md-2">
+            	<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
+            </div>
+        </div>
+    </div> 		
+
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 myTeam">
+				<div ng-repeat="player in collectedPlayer" class="draftBoxes">
+					<h4>{{player.displayName}} - {{player.position}} - {{player.team}}</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
