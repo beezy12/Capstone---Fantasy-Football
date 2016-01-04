@@ -266,7 +266,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						});
 					  } 
 
-					  })
+					  });
 
 	
 
@@ -427,7 +427,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				console.log("its yo turn son");
 			}
 
-		}
+		};
 
 
 
