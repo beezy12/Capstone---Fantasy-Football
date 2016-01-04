@@ -53,7 +53,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// });
 
 
-// ***************************************************************************************************
+        // ***************************************************************************************************
 
 		
 		var ref = new Firebase("https://capstonefootball.firebaseio.com");
@@ -68,6 +68,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
 		var onlineRef = new Firebase("https://capstonefootball.firebaseio.com/user");
+
+
+		var thisUserRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentUid);
 
 		
 
@@ -85,8 +88,6 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 			console.log(thisUser[i]);
 		// 		}
 		// 	})
-
-
 
 
 
@@ -121,7 +122,6 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			}
 		};
 
-
 		//push playerid:userId to teamPlayers in firebase
 		$scope.draftPlayer = function() {
 			teamPlayersRef.child($scope.modalPlayer.$id).set(generalVariables.getUid());
@@ -130,13 +130,27 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			//get ref to player's 'drafted' key, set 'drafted' to true
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
+			//thisUserRef.update({"isTurn": true});
 
+			ref.child("user").child($scope.usersReadyToDraft[$scope.currentTeamCount].$id).child("isTurn").set(false);
+			// $firebaseArray(ref.child("user")).$loaded().then(function(data) {
+			// 	console.log(data);
+			// })
+			
 
 			//change turn 
 			ref.child("teamCount").transaction(function(fbTeamCount) {
+
+				// thisUserRef.update({"isTurn": false});
+
+
+
 			   // If /users/fred/rank has never been set, currentRank will be null.
+			  //console.log("current turn is "+ $scope.usersReadyToDraft[$scope.currentTeamCount].teamName);
 			  return fbTeamCount + 1;
 			});
+
+			ref.child("user").child($scope.usersReadyToDraft[$scope.currentTeamCount].$id).child("isTurn").set(true);
 
 
 		};
@@ -144,7 +158,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			
 
 
- /********************************* Functionality for drafting players and adding them to each team **********************/		
+		/********************************* Functionality for drafting players and adding them to each team **********************/		
 
 		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
@@ -203,7 +217,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		
 	
- /***************************** what teams are online / get team name to output to dom ********************************/
+		/***************************** what teams are online / get team name to output to dom ********************************/
 		
 		$scope.usersReadyToDraft = [];
 		//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
@@ -259,10 +273,11 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 					  console.log("$scope.currentTeamCount ", $scope.currentTeamCount);
 
-					  if ($scope.currentTeamCount > $scope.usersReadyToDraft.length - 1){
+					  // sets the counter back to 0 if it reaches the end of the online users array
+					  if ($scope.currentTeamCount > $scope.usersReadyToDraft.length - 1) {
 					  	ref.child("teamCount").transaction(function(fbTeamCount) {
 						   // If /users/fred/rank has never been set, currentRank will be null.
-						  return fbTeamCount === 0;
+						  return fbTeamCount = 0;
 						});
 					  } 
 
@@ -299,9 +314,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 
 
- /************************************ Outputting Other Teams Players From Dropdown **************************************/		
+		/************************************ Outputting Other Teams Players From Dropdown **************************************/		
 
-		$scope.outputOtherTeam = function(teamName){
+		$scope.outputOtherTeam = function(teamName) {
 			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
 			var filteredUser = [];
 			filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
@@ -341,7 +356,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				
 
 
- /***************************** Move Draft Highlighted Team **************************************************/			
+		/***************************** Move Draft Highlighted Team **************************************************/			
 
 		// var i = 0;
 		// var prevPlayer = $scope.usersReadyToDraft[i - 1];
@@ -425,7 +440,10 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 			if($scope.usersReadyToDraft[$scope.currentTeamCount].$id === currentUid){
 				console.log("its yo turn son");
+				thisUserRef.update({"isTurn": true});
 			}
+
+
 
 		};
 
