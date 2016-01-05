@@ -444,8 +444,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			}
 
 
+			//var startButton = document.getElementById("startIt");
 
+			//$("#startIt").hide();
+			//$("#stopIt").show();
 		};
+
+
+
 
 
 

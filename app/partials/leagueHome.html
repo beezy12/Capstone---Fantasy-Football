@@ -12,13 +12,17 @@
           </div>
 
 
-          <div class="col-md-2 col-md-offset-2 homeButtons">
+          <div class="col-md-2 col-md-offset-2 homeButtons" ng-repeat="homeTeam in userTeamName">
             <a ng-click="logout()" href="#/splash" class="btn btn-default btn-lg active navButt" role="button">Logout</a>
+            <div class="displayHomeTeam">
+              <h4>Logged in as:</h4>
+              <h3 class="homeTeam">{{homeTeam}}</h3>
+            </div>
           </div>
 
-          <div >
-            <p>{{team.teamName}}</p>
-          </div>
+          <!-- <div ng-repeat="homeTeam in userTeamName">
+              <p>{{homeTeam}}</p>
+          </div> -->
       </div>
     </div>
 

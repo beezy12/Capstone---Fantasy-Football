@@ -16,11 +16,11 @@
 
           <div class="draftButtons">
                 <div class="col-md-2 col-md-offset-2">
-                    <button class="btn btn-default btn-lg active navButt" role="button" ng-click="startDraft()">Start Draft</button>
+                    <button class="btn btn-default btn-lg active navButt" id="startIt" role="button" ng-click="startDraft()">Start Draft</button>
                     <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
                 </div>
 
-                <!-- <div class="col-md-2">
+               <!--  <div class="col-md-2">
                     <button class="btn btn-default btn-lg active navButt" ng-click="stopDraft()" role="button">Stop Draft</button>
                 </div> -->
 
@@ -43,6 +43,8 @@
             </div>
           </div>
     </div>
+
+    <!-- ng-class="{takeOut: !user.isTurn}" -->
 
     <div class="container-fluid bottomHalf">
     	<div class="row">

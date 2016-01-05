@@ -1,3 +1,17 @@
+.noPad {
+  padding: 0; }
+
+.takeOut {
+  opacity: .5;
+  pointer-events: none; }
+
+.displayHomeTeam {
+  margin: 25px 0 0 0; }
+
+.homeTeam {
+  color: blue;
+  margin: 0; }
+
 .leagueTeamList {
   width: 400px;
   height: 400px; }
