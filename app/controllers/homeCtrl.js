@@ -1,11 +1,14 @@
 app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$location", "$rootScope", "generalVariables",
 	function($scope, $q, $http, $firebaseArray, $location, $rootScope, generalVariables) {
 		
+		generalVariables.checkUserLogin('home');
 
-		// var ref = new Firebase("https://capstonefootball.firebaseio.com");
+		var currentUid = generalVariables.getUid();
 
 		$scope.userTeams = '';
 		$scope.usersOnline = [];
+
+		$scope.userInfoHere = '';
         
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 		$firebaseArray(userRef).$loaded()
@@ -21,14 +24,18 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 				}
 			}
 					console.log($scope.usersOnline);
-
 		});
 
-		// var userArray = $firebaseArray(userRef);
-		//console.log("MADE IT TO HOMECTRL!!!!!");
 
-		//generalVariables.getUid();
-		generalVariables.checkUserLogin('home');
+
+		var userInfoRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+currentUid);
+		$firebaseArray(userInfoRef).$loaded()
+		.then(function(userInfo) {
+			console.log("userInfo ---->", userInfo);
+			$scope.userInfoHere = userInfo;
+		});
+
+
 
 
 
