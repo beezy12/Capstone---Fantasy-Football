@@ -5,13 +5,23 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 		// var ref = new Firebase("https://capstonefootball.firebaseio.com");
 
 		$scope.userTeams = '';
-
+		$scope.usersOnline = [];
+        
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
 		$firebaseArray(userRef).$loaded()
 		.then(function(usersHere) {
 			console.log("usersHere ---->", usersHere);
 			$scope.userTeams = usersHere;
 			console.log("$scope.userTeams----", $scope.userTeams);
+
+			for (var i = 0; i < $scope.userTeams.length; i++) {
+				if ($scope.userTeams[i].online === true) {
+					$scope.usersOnline.push($scope.userTeams);
+
+				}
+			}
+					console.log($scope.usersOnline);
+
 		});
 
 		// var userArray = $firebaseArray(userRef);
@@ -19,6 +29,9 @@ app.controller("homeCtrl", ["$scope", "$q", "$http", "$firebaseArray", "$locatio
 
 		//generalVariables.getUid();
 		generalVariables.checkUserLogin('home');
+
+
+
 
 
 

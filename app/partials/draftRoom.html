@@ -49,7 +49,7 @@
     		<div class="col-md-4 rightBorder playersBox">
             <h3>Player List</h3>
             <input ng-model="searching" type="text" class="form-control search" placeholder="Search for player">
-              <div class="rightBorder divHeight" ng-disabled="user.isTurn" ng-model="user.isTurn">
+              <div class="rightBorder divHeight">
                 <div ng-repeat="dude in loadedPlayers | filter: searching" class="row draftBoxes draftPicks" ng-click="getPlayerId(dude.$id)" ng-hide="dude.drafted">
                   <div class="col-md-12" data-toggle="modal" data-target="#confirmDraft">
         		     <!-- <img src=""> -->
@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div>
-    		</div>
+    		</div> 
                         
                     
                     
@@ -85,7 +85,7 @@
          <!--  <p ng-repeat="team in usersReadyToDraft">{{team.teamName}} <button class="btn" ng-click="giveButt(team)"></button>
           </p>
      -->
-    			<div ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
+    			<div class="dropdownGuys" ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
           
     		</div>
 

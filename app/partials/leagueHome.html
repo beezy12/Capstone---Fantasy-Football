@@ -37,22 +37,26 @@
 
     <div class="container-fluid">
      	<div class="row">
-       		<div class="col-md-3 col-md-offset-2">
-       			<h3>League Standings</h3>
+       		<div class="col-md-5 col-md-offset-2 leagueTeamList">
+       			<h3>Teams in this league</h3>
                 <table class="leagueList">
                 	<!-- <tr class="leagueTable">
                         <td class="leagueTable">Division 1</td>
                         <td class="leagueTable">Division 2</td>
                     </tr> -->
-                    <tr class="leagueTable" ng-repeat="team in userTeams">
+                    <tr class="leagueTable" ng-repeat="team in userTeams" ng-class="{onlineCircle: team.online}">
                         <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.teamName}}</a></td>
                     </tr>
+
+                    <!-- <tr class="leagueTable" ng-repeat="team in userTeams">
+                        <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.online}}</a></td>
+                    </tr> -->
                         
                     
                 </table>
        		</div>
 
-       		<div class="col-md-3 messageMain">
+       		<div class="col-md-5 col-md-offset-1 messageMain">
        			<h3>Smack Talkin' Area</h3>
        			<textarea class="messageMainBox"></textarea>
        			<input type="text" placeholder="Enter message here...">
