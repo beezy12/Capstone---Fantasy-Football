@@ -1,7 +1,7 @@
-app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope", 
-	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope) { 
+app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$firebaseObject", "generalVariables", "$rootScope",
+	function($scope, $q, $http, $firebaseArray, $firebaseObject, generalVariables, $rootScope) {
 
-		
+
 
 		var prevPlayer;
 		var currentPlayer;
@@ -10,26 +10,26 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		window._ = _;
 
 		$rootScope.started = false;
-		// use this to 
+		// use this to
 		// $rootscope.userCanChoose = true;
 		// if this is true, ng-disabled = falsey or something like that
 		// disable the zplayerlist div
 
 
 		generalVariables.checkUserLogin('draft');
-		
+
 		// get the logged in userId and set it to var currentUid
 		var currentUid = generalVariables.getUid();
 		// console.log("currentUid that gets logged when draft page loads ----->", currentUid);
 
 
- 		// *********************** USE THIS TO POPULATE DRAFT PLAYERS LIST ****************************************************************
+ 		/*********************** USE THIS TO POPULATE DRAFT PLAYERS LIST *****************/
 
 
-		
+
 
 		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
-		
+
 
 		// var apiCall = $q(function(resolve, reject){
 		// 	$http.get("http://www.fantasyfootballnerd.com/service/draft-rankings/json/j8vrkn628sv6/1/").success(
@@ -38,24 +38,24 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 		resolve(object);
 		// 	});
 		// });
-		
+
 		//  //KEEP THIS. THIS IS WHERE I SET EACH PLAYER'S DRAFTED TO FALSE.
 		// apiCall.then(function(data){
 		// 	console.log("data is ", data.DraftRankings);
-			
+
 		// 	for (var i = 0; i < data.DraftRankings.length ; i++){
 		// 		console.log("what the fruit");
 		// 		 console.log("Current Balla status is ", data.DraftRankings[i]);
 		// 		 data.DraftRankings[i].drafted = false;
 		// 		 playerRef.push(data.DraftRankings[i]);
-				 
+
 		// 	}
 		// });
 
 
         // ***************************************************************************************************
 
-		
+
 		var ref = new Firebase("https://capstonefootball.firebaseio.com");
 
 		var teamCountRef = new Firebase("https://capstonefootball.firebaseio.com/teamCount");
@@ -63,7 +63,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
-		
+
 		//var draftRef = new Firebase("https://capstonefootball.firebaseio.com/draftList/"+generalVariables.getUid()+"/");
 			//console.log("heeeeeeereee is the draftlist child attempt ------_>", draftRef);
 
@@ -72,7 +72,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		var thisUserRef = new Firebase("https://capstonefootball.firebaseio.com/user/" + currentUid);
 
-		
+
 
 		$scope.userTeamName = [];
 		// var userIdRef = new Firebase("https://capstonefootball.firebaseio.com/user/"+generalVariables.getUid());
@@ -80,7 +80,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// $firebaseArray(userIdRef)
 		// 	.$loaded()
 		// 	.then(function(thisUser) {
-		// 		//console.log(thisUser.teamName);	
+		// 		//console.log(thisUser.teamName);
 		// 		// $scope.userTeamName = thisUser;
 		// 		// console.log($scope.userTeamName)
 
@@ -98,14 +98,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		$scope.teamPlayersArray = [];
 
-		
+
 		// takes the Firebase ref for the zPlayersList and turns it from an object into an array, which is
 		// then processed through a promise and returned to the empty array above
 		var playerArray = $firebaseArray(playerRef);
-		
+
 
 		// gets the $firebaseArray version of the zplayersRef, called playerArray, and loads into a $scope
-		// variable called $scope.loadedPlayers. 
+		// variable called $scope.loadedPlayers.
 		playerArray
 			.$loaded()
 			.then(function(data) {
@@ -136,9 +136,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			// $firebaseArray(ref.child("user")).$loaded().then(function(data) {
 			// 	console.log(data);
 			// })
-			
 
-			//change turn 
+
+			//change turn
 			ref.child("teamCount").transaction(function(fbTeamCount) {
 
 				// thisUserRef.update({"isTurn": false});
@@ -155,22 +155,22 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		};
 
-			
 
 
-		/********************************* Functionality for drafting players and adding them to each team **********************/		
+
+		/********************************* Functionality for drafting players and adding them to each team **********************/
 
 		$scope.myPlayers = [];
 		// watches for changes to firebase teamPlayers object (which is now an array)
 		var teamPlayersArray = $firebaseArray(teamPlayersRef);
-		
+
 			teamPlayersArray.$loaded()
 				.then(function(draftedPlayers){
-					
+
 
 					$firebaseArray(playerRef).$loaded()
 					.then(function(allPlayers) {
-						
+
 
 						for(var s = 0; s < draftedPlayers.length; s++) {
 							for(var x = 0; x < allPlayers.length; x++) {
@@ -180,14 +180,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 									//generalVariables.setPlayers(allPlayers[x]);
 									//console.log("allPlayers[x]", allPlayers[x]);
-									
+
 								}
 							}
 						}
-										
 
-						teamPlayersArray.$watch(function(snapshot) { 
-						
+
+						teamPlayersArray.$watch(function(snapshot) {
+
 
 							//if child has been added to teamPlayers
 							if(snapshot.event === "child_added"){
@@ -195,7 +195,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 								//get player info of player that matches key, and push that player into my players array
 								$firebaseArray(playerRef).$loaded()
 								.then(function(playersReturned){
-									
+
 
 									//filter all returned players and grab player whose id matches the player added in the event above
 									_.filter(playersReturned, function(index){
@@ -209,16 +209,16 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 						});
 
-						
+
 					});
 
 
 				});
 
-		
-	
+
+
 		/***************************** what teams are online / get team name to output to dom ********************************/
-		
+
 		$scope.usersReadyToDraft = [];
 		//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
 
@@ -229,14 +229,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			.then(function(online) {
 				$scope.onlineUsers = online;
 				console.log($scope.onlineUsers);
-				// *********** had this as $scope.onlineUsers = onlineArray.....but that didn't seem 
+				// *********** had this as $scope.onlineUsers = onlineArray.....but that didn't seem
 				// right. So I changed it to just say online....so now Im using the promise.
 
 				//console.log("$scope.onlineUsers READY", $scope.onlineUsers);
 
 				for (var i = 0; i < $scope.onlineUsers.length; i++) {
 					if ($scope.onlineUsers[i].online === true) {
-						
+
 						$scope.usersReadyToDraft.push($scope.onlineUsers[i]);
 						console.log("$scope.usersReadyToDraft =======>>>", $scope.usersReadyToDraft);
 
@@ -254,7 +254,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 					}
 
 				}
-								
+
 				// prevPlayer = $scope.usersReadyToDraft[i - 1];
 				// console.log("prev player ====", prevPlayer);
 				i = 0;
@@ -279,14 +279,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 						   // If /users/fred/rank has never been set, currentRank will be null.
 						  return fbTeamCount = 0;
 						});
-					  } 
+					  }
 
 					  });
 
-	
+
 			});  // end of the .$loaded .then
 
-				
+
 				// $firebaseArray(usersOnlineNow)
 				// 	.$loaded()
 				// 	.then(function(heyGuys) {
@@ -299,9 +299,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 				// usersOnlineNow = $firebaseArray(usersOnlineNow);
 
-				
 
-				
+
+
 
 			//})
 			// .then(function() {
@@ -309,12 +309,12 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			// 	usersOnlineNow = $firebaseArray(usersOnlineNow);
 			// 	console.log("usersOnlineNow", usersOnlineNow);
 			// 	console.log("ready to draft", $scope.usersReadyToDraft);
-				
 
 
 
 
-		/************************************ Outputting Other Teams Players From Dropdown **************************************/		
+
+		/************************************ Outputting Other Teams Players From Dropdown **************************************/
 
 		$scope.outputOtherTeam = function(teamName) {
 			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
@@ -353,16 +353,16 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			});
 			// output all players assc with that user
 		};
-				
 
 
-		/***************************** Move Draft Highlighted Team **************************************************/			
+
+		/***************************** Move Draft Highlighted Team **************************************************/
 
 		// var i = 0;
 		// var prevPlayer = $scope.usersReadyToDraft[i - 1];
 		// var currentPlayer = $scope.usersReadyToDraft[i];
 		// console.log(currentPlayer)
-		
+
 		// $scope.startDraft = function() {
 		// 	if (currentPlayer) {
 		// 		console.log(i);
@@ -376,9 +376,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 			data.$save();
 		// 			console.log(data);
 		// 		});
-			    
+
 		// 	    console.log("draft has started, it's this player's turn: ", currentPlayer);
-				
+
 		// 		return currentPlayer;
 		// 	}
 		// };
@@ -470,10 +470,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// 			}
 		// 		})
 		// }
-				
+
 }]);
 
 
-
-/**************************************************************************************************************/
-			

@@ -1,8 +1,8 @@
-app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope", 
+app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 	function($q, $http, $location, $rootScope) {
 
 		var userUid;
-		
+
 		var ref = new Firebase("https://capstonefootball.firebaseio.com/");
 		//var authData = ref.getAuth();
 		var userRef = new Firebase("https://capstonefootball.firebaseio.com/user");
@@ -25,16 +25,16 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
               			userUid = authData.uid;
               			//console.log("userUid here in generalVariables", userUid);
                 		$location.path("/"+pathName);
-                
+
               			} else {
                 			//console.log("Client unauthenticated. why is it automatically doing this???");
                 			$location.path("/splash");
               			}
-              		
+
            		});
 
       		},
-                 
+
 
 			getUid: function() {
 				//console.log("uid is ", userUid);
@@ -53,7 +53,7 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 				var newRef = new Firebase("https://capstonefootball.firebaseio.com/"+authData.uid);
 				newRef.unauth();
 
-				
+
 				userRef.child("/"+userUid).update({"online": false});
 
 				//console.log("user" + newRef + " was logged out");
@@ -70,9 +70,9 @@ app.factory("generalVariables", ["$q", "$http", "$location", "$rootScope",
 			}
 
 		};
-	
+
 
 
 }]);
 
-				
+
