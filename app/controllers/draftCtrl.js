@@ -10,12 +10,9 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		window._ = _;
 
 		$rootScope.started = false;
-		// use this to
-		// $rootscope.userCanChoose = true;
-		// if this is true, ng-disabled = falsey or something like that
-		// disable the zplayerlist div
 
 
+		// run the checkUserLogin method stored in the generalVariables factory
 		generalVariables.checkUserLogin('draft');
 
 		// get the logged in userId and set it to var currentUid

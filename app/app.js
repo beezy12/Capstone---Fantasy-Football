@@ -1,4 +1,4 @@
-var app = angular.module("footballGurus", 
+var app = angular.module("footballGurus",
 	['firebase', 'ngRoute']);
 
 app.config(['$routeProvider',
@@ -27,6 +27,7 @@ app.config(['$routeProvider',
 			.when('/players', {
 				templateUrl: './app/partials/players.html',
 				controller: 'playersCtrl'
-			});
+			})
+			.otherwise("/splash");
 	}]);
 
