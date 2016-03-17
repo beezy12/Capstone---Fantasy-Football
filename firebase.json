@@ -1,0 +1,9 @@
+{
+  "firebase": "capstonefootball",
+  "public": "index",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

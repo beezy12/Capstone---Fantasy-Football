@@ -50,14 +50,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// });
 
 
-        // ***************************************************************************************************
+        /*************************************************************************************************/
 
 
 		var ref = new Firebase("https://capstonefootball.firebaseio.com");
 
 		var teamCountRef = new Firebase("https://capstonefootball.firebaseio.com/teamCount");
 
-		var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
+		// var playerRef = new Firebase ("https://capstonefootball.firebaseio.com/zplayersList");
 
 		var teamPlayersRef = new Firebase("https://capstonefootball.firebaseio.com/teamPlayers/"+generalVariables.getUid());
 
