@@ -20,9 +20,6 @@
             </div>
           </div>
 
-          <!-- <div ng-repeat="homeTeam in userTeamName">
-              <p>{{homeTeam}}</p>
-          </div> -->
       </div>
     </div>
 
@@ -30,7 +27,7 @@
 
     <div class="container-fluid">
      	<div class="row">
-       		<div class="col-md-10 col-md-offset-2 navbar">
+       		<div class="col-md-12 text-center navbar">
        			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
       			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
       			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
@@ -48,23 +45,18 @@
        		<div class="col-md-5 col-md-offset-2 leagueTeamList">
        			<h3>Teams in this league</h3>
                 <table class="leagueList">
-                	<!-- <tr class="leagueTable">
-                        <td class="leagueTable">Division 1</td>
-                        <td class="leagueTable">Division 2</td>
-                    </tr> -->
+
                     <tr class="leagueTable" ng-repeat="team in userTeams" ng-class="{onlineCircle: team.online}">
                         <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.teamName}}</a></td>
                     </tr>
 
-                    <!-- <tr class="leagueTable" ng-repeat="team in userTeams">
-                        <td class="leagueTable"><a href="#/players/{{team.$id}}">{{team.online}}</a></td>
-                    </tr> -->
-                        
-                    
+
+
+
                 </table>
        		</div>
 
-       		<div class="col-md-5 col-md-offset-1 messageMain">
+       		<div class="col-md-5 text-center messageMain">
        			<h3>Smack Talkin' Area</h3>
        			<textarea class="messageMainBox"></textarea>
        			<input type="text" placeholder="Enter message here...">
@@ -72,5 +64,5 @@
        		</div>
        	</div>
     </div>
-              
+
 </div>

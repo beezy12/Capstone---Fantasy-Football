@@ -18,7 +18,7 @@
 
       <div class="container-fluid">
        	<div class="row">
-         		<div class="col-md-10 col-md-offset-2 navbar">
+         		<div class="col-md-12 navbar text-center">
          			<a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
         			<a href="#/team" class="btn btn-default btn-lg active navButt" role="button">My Team</a>
         			<a href="#/players" class="btn btn-default btn-lg active navButt" role="button">Scoring Settings</a>
@@ -29,7 +29,7 @@
 
       <div class="container-fluid teamDiv">
       	<div class="row">
-      		<div class="col-md-12">
+      		<div class="col-md-7 col-md-offset-4">
       			<div class="myTeam">
               <div class="draftBoxes" ng-repeat="player in myPlayers">{{player.displayName}} - {{player.position}}- {{player.team}}</div>
       			</div>
@@ -39,4 +39,4 @@
 </div>
 
 
-              
+

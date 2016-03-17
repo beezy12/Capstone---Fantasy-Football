@@ -11,24 +11,20 @@
      		  <div class="col-md-2 col-md-offset-2" ng-repeat="name in userTeamName">
        			<h2>Team:</h2>
             <h1 class="draftTeamName">{{name}}</h1>
-          </div> 
+          </div>
 
 
           <div class="draftButtons">
                 <div class="col-md-2 col-md-offset-2">
                     <button class="btn btn-default btn-lg active navButt" id="startIt" role="button" ng-click="startDraft()">Start Draft</button>
-                    <!-- <button class="btn btn-default btn-lg active navButt" role="button" ng-click="moveToNextPlayer()">boom</button> -->
-                </div>
 
-               <!--  <div class="col-md-2">
-                    <button class="btn btn-default btn-lg active navButt" ng-click="stopDraft()" role="button">Stop Draft</button>
-                </div> -->
+                </div>
 
                 <div class="col-md-2">
                     <a href="#/home" class="btn btn-default btn-lg active navButt" role="button">League Home</a>
                 </div>
           </div>
-          
+
 
       </div>
     </div>
@@ -44,7 +40,7 @@
           </div>
     </div>
 
-    <!-- ng-class="{takeOut: !user.isTurn}" -->
+
 
     <div class="container-fluid bottomHalf">
     	<div class="row">
@@ -59,10 +55,10 @@
                   </div>
                 </div>
               </div>
-    		</div> 
-                        
-                    
-                    
+    		</div>
+
+
+
 
     		<div class="col-md-5 rightBorder draft">
     			<h3 class="myRoster">My Team</h3>
@@ -70,12 +66,12 @@
               <div ng-repeat="player in myPlayers" class="animated bounce">
                 <div class="draftBoxes">{{player.displayName}} - {{player.position}} - {{player.team}}</div>
               </div>
-    				
+
     			</div>
     		</div>
 
 
-        <!-- ng-options="user.name for user in users     (LUKE HAD THIS IN THE SELECT, BUT I TOOK IT OUT)-->
+
 
     		<div class="col-md-3 draft">
         <h3>Other teams rosters</h3>
@@ -84,17 +80,9 @@
             <option ng-repeat="team in usersReadyToDraft">{{team.teamName}}</option>
     			</select>
 
-         <!--  <p ng-repeat="team in usersReadyToDraft">{{team.teamName}} <button class="btn" ng-click="giveButt(team)"></button>
-          </p>
-     -->
     			<div class="dropdownGuys" ng-repeat="guy in filteredPlayers">{{guy.displayName}}</div>
-          
-    		</div>
 
-    		<!-- <div id="message">
-            <input id="field-input" type="text" placeholder="Smack it">
-            <input id="submit-input" type="submit" value="SUBMIT">
-        </div> -->
+    		</div>
 
 
 
@@ -111,7 +99,7 @@
               </div>
               <div class="modal-body">
                   <button ng-click="draftPlayer(); moveToNextPlayer()" data-dismiss="modal" class="btn">DRAFT</button>
-                  <!-- <button class="btn" data-dismiss="modal">No</button> -->
+
               </div>
               <div class="modal-footer">
                 <button type="button" ng-click="cancelPlayer()" class="btn btn-default" data-dismiss="modal">cancel</button>
@@ -122,5 +110,5 @@
         </div>
     	</div>
     </div>
-      
+
 </div>

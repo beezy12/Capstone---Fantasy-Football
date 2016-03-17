@@ -132,7 +132,7 @@ body {
   width: 400px;
   height: 500px;
   border: 2px solid red;
-  margin: 40px 0 0 420px;
+  margin: 40px 0 0 0;
   overflow: scroll; }
 
 .draftBoxes {
