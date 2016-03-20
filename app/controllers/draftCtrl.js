@@ -17,7 +17,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 		// get the logged in userId and set it to var currentUid
 		var currentUid = generalVariables.getUid();
-		// console.log("currentUid that gets logged when draft page loads ----->", currentUid);
+
 
 
  		/*********************** USE THIS TO POPULATE DRAFT PLAYERS LIST *****************/
@@ -82,7 +82,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 
 		// takes the Firebase ref for the zPlayersList and turns it from an object into an array, which is
-		// then processed through a promise and returned to the empty array above
+		// then processed through a promise and returned to the empty array.
 		var playerArray = $firebaseArray(playerRef);
 
 
@@ -104,15 +104,17 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 			}
 		};
 
-		//push playerid:userId to teamPlayers in firebase
+		// this function fires on the modal "draft player?" click.
+		// push playerid:userId to teamPlayers in firebase   AKA assigns the user's Id as a child to the
+		// drafted player's Id
 		$scope.draftPlayer = function() {
 			teamPlayersRef.child($scope.modalPlayer.$id).set(generalVariables.getUid());
-			//console.log("teamPlayersRef.child($scope.modalPlayer.$id) -----> here", teamPlayersRef);
 
-			//get ref to player's 'drafted' key, set 'drafted' to true
+
+			//get ref to player's 'drafted' key, set 'drafted' to true, which removes the player from the list of draftable players
 			playerRef.child($scope.modalPlayer.$id).child("drafted").set(true);
 
-
+			// after the user clicks the draft button, their turn is set to false.
 			ref.child("user").child($scope.usersReadyToDraft[$scope.currentTeamCount].$id).child("isTurn").set(false);
 
 
@@ -143,17 +145,19 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		// watches for changes to firebase teamPlayers object (which is now an array)
 		var teamPlayersArray = $firebaseArray(teamPlayersRef);
 
+			// ref for the players a user has already drafted
 			teamPlayersArray.$loaded()
 				.then(function(draftedPlayers){
 
-
+					// ref for the draftable players list
 					$firebaseArray(playerRef).$loaded()
 					.then(function(allPlayers) {
 
-
+						// nested for loops looking for a match below
 						for(var s = 0; s < draftedPlayers.length; s++) {
 							for(var x = 0; x < allPlayers.length; x++) {
 
+								// assigns the newly drafted player to the correct user's team
 								if(draftedPlayers[s].$id ===  allPlayers[x].$id && draftedPlayers[s].$value === currentUid) {
 									$scope.myPlayers.push(allPlayers[x]);
 
@@ -161,7 +165,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 							}
 						}
 
-
+						// watching firebase for a change, so the user's player list will live update
 						teamPlayersArray.$watch(function(snapshot) {
 
 
@@ -196,7 +200,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		/***************************** what teams are online / get team name to output to dom ********************************/
 
 		$scope.usersReadyToDraft = [];
-		//console.log("$scope.usersReadyToDraft array right here", $scope.usersReadyToDraft);
+
 
 		var onlineArray = $firebaseArray(onlineRef);
 
@@ -209,7 +213,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				// right. So I changed it to just say online....so now Im using the promise.
 
 
-
+				// when a user logs in, their online status is set to true, and then gets pushed into an array that shows all online users, so that they can be highlighted on screen.
 				for (var i = 0; i < $scope.onlineUsers.length; i++) {
 					if ($scope.onlineUsers[i].online === true) {
 
@@ -223,17 +227,19 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 				}
 
+				// draft counter starts at 0 and increments up as user's draft.
 				i = 0;
 				currentPlayer = $scope.usersReadyToDraft[i];
 
 				//set firebase teamcount to i
 				ref.child("teamCount").set(i);
 
-					//update function --> when teamCOunt changes run this
+					//update function --> when teamCount changes run this
 					teamCountRef.on('value', function(value) {
-					  // code to handle new value.
 
+					  // code to handle new value.
 					  $scope.currentTeamCount = value.val();
+
 
 					  // sets the counter back to 0 if it reaches the end of the online users array
 					  if ($scope.currentTeamCount > $scope.usersReadyToDraft.length - 1) {
@@ -258,13 +264,14 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 		/************************************ Outputting Other Teams Players From Dropdown **************************************/
 
 		$scope.outputOtherTeam = function(teamName) {
-			//console.log("$scope.usersReadyToDraft ", $scope.usersReadyToDraft);
+
 			var filteredUser = [];
 			filteredUser = _.filter($scope.usersReadyToDraft, ({"teamName": teamName}));
 
 			$scope.filteredPlayers=[];
-			//take filtered user,
 
+			//take filtered user's team, and if that user's id matches the selected team in the dropdown,
+			// push all of that user's players to an array that can be output to the screen.
 			$firebaseArray(playerRef).$loaded()
 			.then(function(listOfPlayers){
 				var zPlayersList = listOfPlayers;
@@ -274,7 +281,7 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 				$firebaseArray(newUserRef).$loaded()
 				.then(function(playas){
 
-					for(var i = 0; i< playas.length; i++){
+					for(var i = 0; i < playas.length; i++){
 
 						//id of player we are looking for is in playas[i].$id
 						for(var p = 0; p < zPlayersList.length; p++){
@@ -287,18 +294,18 @@ app.controller('draftCtrl', ["$scope", "$q", "$http", "$firebaseArray", "$fireba
 
 					}
 
-					console.log("filteredPlayers", $scope.filteredPlayers);
+
 
 				});
 
 			});
-			// output all players assc with that user
+
 		};
 
 
 
 
-		//NEW TESTING STUFFS
+		// sets the isTurn to true if it is the user's turn.
 		$scope.startDraft = function() {
 
 			if($scope.usersReadyToDraft[$scope.currentTeamCount].$id === currentUid){
